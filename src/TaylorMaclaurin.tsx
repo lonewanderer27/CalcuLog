@@ -14,6 +14,26 @@ export default function TaylorMaclaurin(props: {
 		props.setMark(markEnums.taylorMaclaurin);
 	};
 
+	const handleChange = (
+		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
+		console.log(event);
+		props.setTMValues((prevVal) => {
+			console.log("prevVal", prevVal);
+			if (typeof event.target.value === "number") {
+				return {
+					...prevVal,
+					[event.target.name]: Number(event.target.value),
+				};
+			} else {
+				return {
+					...prevVal,
+					[event.target.name]: event.target.value,
+				};
+			}
+		});
+	};
+
 	return (
 		<div className="taylorMaclaurin">
 			<span className="title">Taylor Maclaurin</span>
@@ -22,16 +42,23 @@ export default function TaylorMaclaurin(props: {
 					<label htmlFor="function">Enter a function</label>
 					<input
 						type="text"
-						name="Function"
+						name="function"
 						id="function"
 						value={props.function}
+						onChange={handleChange}
 					/>
 				</div>
 
 				<div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
 					<div className="inputGroup">
 						<label htmlFor="point">Enter a point</label>
-						<input type="text" name="point" id="point" value={props.point} />
+						<input
+							type="text"
+							name="point"
+							id="point"
+							value={props.point}
+							onChange={handleChange}
+						/>
 					</div>
 					<div className="inputGroup">
 						<label htmlFor="">(For Maclaurin, set point to 0.)</label>
@@ -46,6 +73,7 @@ export default function TaylorMaclaurin(props: {
 							name="nthDegree"
 							id="nthDegree"
 							value={props.nthDegree}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="inputGroup"></div>
