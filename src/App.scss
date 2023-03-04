@@ -1,0 +1,73 @@
+#root {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.App {
+  display: grid;
+  grid-template-areas: 
+    'header header header header'
+    'propagationError propagationError taylorMaclaurin taylorMaclaurin'
+    'keyboard keyboard keyboard keyboard';
+}
+
+.header {
+  width: 100%;
+  padding: 5px 0;
+  border-bottom: 1px solid black;
+  grid-area: header;
+}
+
+.header, .keyboard {
+  background-color: #D6D6D6;
+}
+
+.propagationError, .taylorMaclaurin {
+  height: 80vh;
+}
+
+.propagationError {
+  grid-area: propagationError;
+  background-color: #FF9898;
+  color: white;
+  margin: 20px 10px 20px 20px;
+}
+
+.taylorMaclaurin {
+  grid-area: taylorMaclaurin;
+  background-color: #A6C6E4;
+  color: white;
+  margin: 20px 20px 20px 10px;
+}
+
+.keyboard {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  grid-area: keyboard;
+  padding: 20px;
+  .keyboard--header {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 95%;
+      background-color: transparent;
+      border: none;
+      font-size: xx-large;
+    }
+    .expandKeyboard {
+      width: 50px;
+
+    }
+  }
+  .keyboard--body {
+    .keys {
+
+    }
+
+    height: 25vh;
+  }
+}
