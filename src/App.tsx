@@ -25,6 +25,22 @@ function App() {
 	const back = () => setMark(markEnums.idle);
 	console.log("PEvalues:", PEvalues);
 
+	const remove = (choice: number) => {
+		switch(choice) {
+			case 1: setPEValues({
+				trueValue: "",
+				approxValue: 0,
+				roundingchopping: roundingchopping.rounding,
+				numDigits: 0,
+			}); break;
+			case 2: setTMValues({
+				function: "",
+				point: 0,
+				nthDegree: 0,
+			}); break;
+		}
+	}
+
 	return (
 		<div className="App">
 			<Header />
@@ -35,6 +51,7 @@ function App() {
 					setMark={setMark}
 					back={back}
 					setPEValues={setPEValues}
+					remove={remove}
 					{...PEvalues}
 				/>
 			)}
@@ -46,6 +63,7 @@ function App() {
 					setMark={setMark}
 					back={back}
 					setTMValues={setTMValues}
+					remove={remove}
 					{...TMvalues}
 				/>
 			)}

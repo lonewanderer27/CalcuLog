@@ -11,6 +11,7 @@ export default function PropagationError(props: {
 	chopping?: boolean;
 	numDigits?: number;
 	setPEValues: React.Dispatch<React.SetStateAction<PEValueProps>>;
+	remove: (choice: number) => void;
 }) {
 	const solve = () => {
 		props.setMark(markEnums.propagationError);
@@ -97,7 +98,7 @@ export default function PropagationError(props: {
 					Submit
 				</button>
 				{props.mark === markEnums.idle && (
-					<button className="button removeBtn">Remove</button>
+					<button className="button removeBtn" onClick={()=>props.remove(1)}>Remove</button>
 				)}
 				{props.mark === markEnums.propagationError && (
 					<button className="button backBtn" onClick={props.back}>

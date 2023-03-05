@@ -9,6 +9,7 @@ export default function TaylorMaclaurin(props: {
 	point?: number;
 	nthDegree?: number;
 	setTMValues: React.Dispatch<React.SetStateAction<TMValueProps>>;
+	remove: (choice: number) => void
 }) {
 	const solve = () => {
 		props.setMark(markEnums.taylorMaclaurin);
@@ -84,7 +85,7 @@ export default function TaylorMaclaurin(props: {
 					Submit
 				</button>
 				{props.mark === markEnums.idle && (
-					<button className="button removeBtn">Remove</button>
+					<button className="button removeBtn" onClick={()=>props.remove(2)}>Remove</button>
 				)}
 				{props.mark === markEnums.taylorMaclaurin && (
 					<button className="button backBtn" onClick={props.back}>
