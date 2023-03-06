@@ -1,18 +1,21 @@
 import { markEnums } from "./enums";
 import { PEValueProps } from "./ValueProps";
+import { useState } from "react";
 
 export default function PropagationError(props: {
 	mark: markEnums;
 	setMark: React.Dispatch<React.SetStateAction<markEnums>>;
 	back: () => void;
 	trueValue?: string;
-	approxValue?: number;
+	// approxValue?: number;
 	rounding?: boolean;
 	chopping?: boolean;
 	numDigits?: number;
 	setPEValues: React.Dispatch<React.SetStateAction<PEValueProps>>;
 	remove: (choice: number) => void;
 }) {
+	const [answerState, setAnswerState] = useState()
+
 	const solve = () => {
 		props.setMark(markEnums.propagationError);
 	};
@@ -52,7 +55,7 @@ export default function PropagationError(props: {
 					/>
 				</div>
 
-				<div className="inputGroup">
+				{/* <div className="inputGroup">
 					<label htmlFor="approxValue">Approximate Value</label>
 					<input
 						type="text"
@@ -61,7 +64,7 @@ export default function PropagationError(props: {
 						value={props.approxValue}
 						onChange={handleChange}
 					/>
-				</div>
+				</div> */}
 
 				<div
 					style={{

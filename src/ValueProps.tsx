@@ -2,7 +2,7 @@ import { roundingchopping } from "./enums";
 
 export type PEValueProps = {
 	trueValue: string;
-	approxValue: number;
+	// approxValue: number;
 	roundingchopping: roundingchopping;
 	numDigits: number;
 };
