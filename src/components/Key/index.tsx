@@ -4,8 +4,8 @@ import Text2SVG from "react-hook-mathjax";
 
 export default function Key(props: {
   value: string;
-  realvalue?: number;
   type: KeyType;
+  latex?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined
 }){
   const determineBGColor = () => {
@@ -33,10 +33,14 @@ export default function Key(props: {
       backgroundColor: determineBGColor(),
       color: determineColor()
     }} onClick={props.onClick}>
-      <Text2SVG
+      {props.latex === true ? <Text2SVG
         display="inline"
         latex={props.value}
-      />
+      /> : props.value}
     </button>    
   )
+}
+
+Key.defaultProps = {
+  latex: true
 }
