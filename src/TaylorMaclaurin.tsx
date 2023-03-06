@@ -1,5 +1,8 @@
-import { markEnums } from "./enums";
+import { markEnums, InputType } from "./enums";
 import { TMValueProps } from "./ValueProps";
+import { useState } from "react";
+import Tex2SVG from "react-hook-mathjax";
+import { getErrorFromHTML } from "./App";
 
 export default function TaylorMaclaurin(props: {
 	mark: markEnums;
@@ -10,9 +13,16 @@ export default function TaylorMaclaurin(props: {
 	nthDegree?: number;
 	setTMValues: React.Dispatch<React.SetStateAction<TMValueProps>>;
 	remove: (choice: number) => void;
-	error?: HTMLElement | undefined;
-	setError: React.Dispatch<React.SetStateAction<HTMLElement | undefined>>;
+	expand: boolean;
+	setExpand: React.Dispatch<React.SetStateAction<boolean>>;
+	toggleExpand: () => void;
+	currentInputRef: React.MutableRefObject<null>;
+	focusedInput: InputType;
+	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {
+	const [TMsuccess, setTMsucess] = useState<boolean>(false);
+	const [TMerror, setTMerror] = useState<HTMLElement | undefined>();
+
 	const solve = () => {
 		props.setMark(markEnums.taylorMaclaurin);
 	};
@@ -49,7 +59,25 @@ export default function TaylorMaclaurin(props: {
 						id="function"
 						value={props.function}
 						onChange={handleChange}
+						onFocus={(e) => {
+							props.setExpand(true);
+							props.setFocusedInput(InputType.function)
+						}}
 					/>
+					<div className="Tex2SVGContainer"
+							style={{display: TMsuccess && props.function ? "block" : "none"}}
+						>
+							<Tex2SVG 
+								class="Tex2SVG"
+								display="inline" 
+								latex={props.function || ""}
+								onSuccess={() => setTMsucess(true)}
+								onError={(html) => {
+									setTMsucess(false);
+									setTMerror(getErrorFromHTML(html))
+								}}
+							/>
+						</div>
 				</div>
 
 				<div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>

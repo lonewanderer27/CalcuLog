@@ -19,7 +19,7 @@ function App() {
 	const [focusedInput, setFocusedInput] = useState<InputType>(InputType.none);
 	const [PEvalues, setPEValues] = useState<PEValueProps>(() => ({
 		trueValue: "",
-		approxValue: 0,
+		approxValue: "",
 		roundingchopping: roundingchopping.rounding,
 		numDigits: 0,
 	}));
@@ -29,6 +29,34 @@ function App() {
 		nthDegree: 0,
 	}));
 	const [TMerror, setTMerror] = useState<HTMLElement | undefined>();
+	const insertToInput = (input: string) => {
+		switch(focusedInput){
+			case InputType.trueValue: {
+				setPEValues((prev) => {
+					return {
+						...prev,
+						trueValue: `${PEvalues.trueValue}${input}`
+					}
+				})
+			}; break;
+			case InputType.approxValue: {
+				setPEValues((prev) => {
+					return {
+						...prev,
+						approxValue: `${PEvalues.approxValue}${input}`
+					}
+				})
+			}; break;
+			case InputType.function: {
+				setTMValues((prev) => {
+					return {
+						...prev,
+						function: `${TMvalues.function}${input}`
+					}
+				})
+			}; break;
+		}
+	}
 
 	const currentInputRef = useRef(null);
 	const [expand, setExpand] = useState(false);
@@ -39,7 +67,7 @@ function App() {
 		switch(choice) {
 			case 1: setPEValues({
 				trueValue: "",
-				approxValue: 0,
+				approxValue: "",
 				roundingchopping: roundingchopping.rounding,
 				numDigits: 0,
 			}); break;
@@ -82,6 +110,12 @@ function App() {
 					back={back}
 					setTMValues={setTMValues}
 					remove={remove}
+					expand={expand}
+					setExpand={setExpand}
+					toggleExpand={toggleExpand}
+					currentInputRef={currentInputRef}
+					focusedInput={focusedInput}
+					setFocusedInput={setFocusedInput}
 					{...TMvalues}
 				/>
 			)}
@@ -91,6 +125,7 @@ function App() {
 				expand={expand}
 				setExpand={setExpand}
 				toggleExpand={toggleExpand}
+				inserToInput={insertToInput}
 			/>
 		</div>
 	);
