@@ -1,19 +1,29 @@
-import { markEnums } from "./enums";
+import { InputType, markEnums } from "./enums";
 import { PEValueProps } from "./ValueProps";
 import { useState } from "react";
+import Tex2SVG from "react-hook-mathjax";
+import { getErrorFromHTML } from "./App";
 
 export default function PropagationError(props: {
 	mark: markEnums;
 	setMark: React.Dispatch<React.SetStateAction<markEnums>>;
 	back: () => void;
-	trueValue?: string;
-	approxValue?: number;
-	rounding?: boolean;
-	chopping?: boolean;
-	numDigits?: number;
+	trueValue: string;
+	approxValue: number;
+	rounding: boolean;
+	chopping: boolean;
+	numDigits: number;
 	setPEValues: React.Dispatch<React.SetStateAction<PEValueProps>>;
 	remove: (choice: number) => void;
+	expand: boolean;
+	setExpand: React.Dispatch<React.SetStateAction<boolean>>;
+	toggleExpand: () => void;
+	currentInputRef: React.MutableRefObject<null>;
+	focusedInput: InputType;
+	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {
+	const [PEsuccess, setPEsucess] = useState<boolean>(false);
+	const [PEerror, setPEerror] = useState<HTMLElement | undefined>();
 	const [answerState, setAnswerState] = useState()
 
 	const solve = () => {
@@ -46,13 +56,31 @@ export default function PropagationError(props: {
 			<div className="body">
 				<div className="inputGroup">
 					<label htmlFor="trueValue">True Value</label>
-					<input
-						type="text"
-						name="trueValue"
-						id="trueValue"
-						value={props.trueValue}
-						onChange={handleChange}
-					/>
+						<input
+							type="text"
+							name="trueValue"
+							id="trueValue"
+							value={props.trueValue}
+							onChange={handleChange}
+							onFocus={(e) => {
+								props.setExpand(true);
+								props.setFocusedInput(InputType.trueValue)
+							}}
+						/>
+						<div className="Tex2SVGContainer"
+							style={{display: PEsuccess && props.trueValue ? "block" : "none"}}
+						>
+							<Tex2SVG 
+								class="Tex2SVG"
+								display="inline" 
+								latex={props.trueValue || ""}
+								onSuccess={() => setPEsucess(true)}
+								onError={(html) => {
+									setPEsucess(false);
+									setPEerror(getErrorFromHTML(html))
+								}}
+							/>
+						</div>
 				</div>
 
 				<div className="inputGroup">
@@ -63,6 +91,10 @@ export default function PropagationError(props: {
 						id="approxValue"
 						value={props.approxValue}
 						onChange={handleChange}
+						onFocus={(e) => {
+							props.setExpand(true);
+							props.setFocusedInput(InputType.approxValue)
+						}}
 					/>
 				</div>
 
@@ -71,7 +103,6 @@ export default function PropagationError(props: {
 						display: "flex",
 						flexDirection: "row",
 						gap: "10px",
-						margin: "30px 0",
 					}}
 				>
 					<div className="inputGroup">

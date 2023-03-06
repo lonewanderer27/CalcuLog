@@ -124,35 +124,17 @@
 	color: white;
 }
 
-/* === FOOTER === */
-
-.keyboard {
-	position: -webkit-sticky;
-	position: sticky;
-	bottom: 0;
-	grid-area: keyboard;
-	border-top: 1px solid black;
-
-	.keyboard--header {
-		background-color: #d9d9d9;
-		display: flex;
-		justify-content: space-between;
-		margin: 18px;
-
-		input {
-			width: 95%;
-			background-color: #d9d9d9;
-			border: none;
-			font-size: 30px;
-		}
-		.expandKeyboard {
-			width: 50px;
-		}
-	}
-
-	.keyboard--body {
-		height: 25vh;
-		padding: 18px;
-		background-color: #aab2b9;
-	}
+.Tex2SVGContainer {
+	width: 100%;
+	background-color: white;
+	padding: 10px 5px;
+	border: 1px solid black;	
 }
+
+.Tex2SVG {
+	color: black;
+	background-color: white;
+}
+
+
+/* === FOOTER === */

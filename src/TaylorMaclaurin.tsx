@@ -9,7 +9,9 @@ export default function TaylorMaclaurin(props: {
 	point?: number;
 	nthDegree?: number;
 	setTMValues: React.Dispatch<React.SetStateAction<TMValueProps>>;
-	remove: (choice: number) => void
+	remove: (choice: number) => void;
+	error?: HTMLElement | undefined;
+	setError: React.Dispatch<React.SetStateAction<HTMLElement | undefined>>;
 }) {
 	const solve = () => {
 		props.setMark(markEnums.taylorMaclaurin);

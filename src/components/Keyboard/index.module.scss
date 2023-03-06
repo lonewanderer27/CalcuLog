@@ -1,0 +1,32 @@
+.keyboard {
+	position: -webkit-sticky;
+	position: sticky;
+	bottom: 0;
+	grid-area: keyboard;
+	border-top: 1px solid black;
+  background-color: #d9d9d9;
+}
+
+.keyboardBody {
+  min-height: 30vh;
+  padding: 18px;
+  background-color: #aab2b9;
+}
+
+.keyboardHeader {
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: space-between;
+  margin: 18px;
+}
+
+.input {
+  width: 95%;
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+}
+
+.expandKeyboard {
+  width: 50px;
+}
