@@ -13,7 +13,7 @@ function App() {
 	const [mark, setMark] = useState<markEnums>(() => markEnums.idle);
 	const [PEvalues, setPEValues] = useState<PEValueProps>(() => ({
 		trueValue: "",
-		// approxValue: 0,
+		approxValue: 0,
 		roundingchopping: roundingchopping.rounding,
 		numDigits: 0,
 	}));
@@ -29,7 +29,7 @@ function App() {
 		switch(choice) {
 			case 1: setPEValues({
 				trueValue: "",
-				// approxValue: 0,
+				approxValue: 0,
 				roundingchopping: roundingchopping.rounding,
 				numDigits: 0,
 			}); break;

@@ -7,7 +7,7 @@ export default function PropagationError(props: {
 	setMark: React.Dispatch<React.SetStateAction<markEnums>>;
 	back: () => void;
 	trueValue?: string;
-	// approxValue?: number;
+	approxValue?: number;
 	rounding?: boolean;
 	chopping?: boolean;
 	numDigits?: number;
@@ -55,7 +55,7 @@ export default function PropagationError(props: {
 					/>
 				</div>
 
-				{/* <div className="inputGroup">
+				<div className="inputGroup">
 					<label htmlFor="approxValue">Approximate Value</label>
 					<input
 						type="text"
@@ -64,7 +64,7 @@ export default function PropagationError(props: {
 						value={props.approxValue}
 						onChange={handleChange}
 					/>
-				</div> */}
+				</div>
 
 				<div
 					style={{
