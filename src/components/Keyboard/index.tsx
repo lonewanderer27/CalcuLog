@@ -18,7 +18,9 @@ export default function Keyboard(props: {
 	}
 
 	return (
-		<div className={Styles.keyboard}>
+		<div className={Styles.keyboard} style={{
+			position: props.expand ? "sticky": "absolute"
+		}}>
 			<div className={Styles.keyboardHeader}>
 				<span
 					className={Styles.input}

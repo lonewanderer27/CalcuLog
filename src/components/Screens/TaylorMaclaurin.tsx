@@ -1,8 +1,8 @@
-import { markEnums, InputType } from "./enums";
-import { TMValueProps } from "./ValueProps";
+import { markEnums, InputType, buttonType } from "../../enums";
+import { TMprops } from "../../types";
 import { useState } from "react";
 import Tex2SVG from "react-hook-mathjax";
-import { getErrorFromHTML } from "./App";
+import Button from "../../components/Button";
 
 export default function TaylorMaclaurin(props: {
 	mark: markEnums;
@@ -11,7 +11,7 @@ export default function TaylorMaclaurin(props: {
 	function?: string;
 	point?: number;
 	nthDegree?: number;
-	setTMValues: React.Dispatch<React.SetStateAction<TMValueProps>>;
+	setTMValues: React.Dispatch<React.SetStateAction<TMprops>>;
 	remove: (choice: number) => void;
 	expand: boolean;
 	setExpand: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,8 +20,7 @@ export default function TaylorMaclaurin(props: {
 	focusedInput: InputType;
 	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {
-	const [TMsuccess, setTMsucess] = useState<boolean>(false);
-	const [TMerror, setTMerror] = useState<HTMLElement | undefined>();
+	const [FSuccess, setFSuccess] = useState<boolean>(false);
 
 	const solve = () => {
 		props.setMark(markEnums.taylorMaclaurin);
@@ -63,19 +62,17 @@ export default function TaylorMaclaurin(props: {
 							props.setExpand(true);
 							props.setFocusedInput(InputType.function)
 						}}
+						ref={props.focusedInput === InputType.function ? props.currentInputRef : undefined}
 					/>
 					<div className="Tex2SVGContainer"
-							style={{display: TMsuccess && props.function ? "block" : "none"}}
+							style={{display: FSuccess && props.function ? "block" : "none"}}
 						>
 							<Tex2SVG 
 								class="Tex2SVG"
 								display="inline" 
 								latex={props.function || ""}
-								onSuccess={() => setTMsucess(true)}
-								onError={(html) => {
-									setTMsucess(false);
-									setTMerror(getErrorFromHTML(html))
-								}}
+								onSuccess={() => setFSuccess(true)}
+								onError={() => {setFSuccess(false)}}
 							/>
 						</div>
 				</div>
@@ -111,17 +108,9 @@ export default function TaylorMaclaurin(props: {
 				</div>
 			</div>
 			<div className="footer">
-				<button className="button submitBtn" onClick={() => solve()}>
-					Submit
-				</button>
-				{props.mark === markEnums.idle && (
-					<button className="button removeBtn" onClick={()=>props.remove(2)}>Remove</button>
-				)}
-				{props.mark === markEnums.taylorMaclaurin && (
-					<button className="button backBtn" onClick={props.back}>
-						Back
-					</button>
-				)}
+				<Button buttonType={buttonType.submitBtn} onClick={() => solve()} />
+				{props.mark === markEnums.idle && <Button buttonType={buttonType.removeBtn} onClick={() => props.remove(2)} /> }
+				{props.mark === markEnums.taylorMaclaurin && <Button buttonType={buttonType.backBtn} onClick={() => props.back} /> }
 			</div>
 		</div>
 	);

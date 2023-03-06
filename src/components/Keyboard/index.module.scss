@@ -1,5 +1,5 @@
 .keyboard {
-	position: absolute;
+	position: sticky;
 	bottom: 0;
 	grid-area: keyboard;
 	border-top: 1px solid black;
@@ -17,7 +17,7 @@
   background-color: #d9d9d9;
   display: flex;
   justify-content: space-between;
-  margin: 18px;
+  margin: 10px;
 }
 
 .input {

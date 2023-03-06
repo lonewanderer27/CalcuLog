@@ -1,19 +1,18 @@
-import { InputType, markEnums } from "./enums";
-import { PEValueProps } from "./ValueProps";
+import { InputType, markEnums } from "../../enums";
+import { PEprops } from "../../types";
 import { useState } from "react";
 import Tex2SVG from "react-hook-mathjax";
-import { getErrorFromHTML } from "./App";
 
 export default function PropagationError(props: {
 	mark: markEnums;
 	setMark: React.Dispatch<React.SetStateAction<markEnums>>;
 	back: () => void;
 	trueValue: string;
-	approxValue: number;
+	approxValue: string;
 	rounding: boolean;
 	chopping: boolean;
 	numDigits: number;
-	setPEValues: React.Dispatch<React.SetStateAction<PEValueProps>>;
+	setPEValues: React.Dispatch<React.SetStateAction<PEprops>>;
 	remove: (choice: number) => void;
 	expand: boolean;
 	setExpand: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,8 +21,8 @@ export default function PropagationError(props: {
 	focusedInput: InputType;
 	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {
-	const [PEsuccess, setPEsucess] = useState<boolean>(false);
-	const [PEerror, setPEerror] = useState<HTMLElement | undefined>();
+	const [TVsuccess, setTVsuccess] = useState<boolean>(false);
+	const [AVsuccess, setAVsuccess] = useState<boolean>(false);
 	const [answerState, setAnswerState] = useState()
 
 	const solve = () => {
@@ -62,23 +61,21 @@ export default function PropagationError(props: {
 							id="trueValue"
 							value={props.trueValue}
 							onChange={handleChange}
+							ref={props.focusedInput === InputType.trueValue ? props.currentInputRef : undefined}
 							onFocus={(e) => {
 								props.setExpand(true);
 								props.setFocusedInput(InputType.trueValue)
 							}}
 						/>
 						<div className="Tex2SVGContainer"
-							style={{display: PEsuccess && props.trueValue ? "block" : "none"}}
+							style={{display: TVsuccess && props.trueValue ? "block" : "none"}}
 						>
 							<Tex2SVG 
 								class="Tex2SVG"
 								display="inline" 
 								latex={props.trueValue || ""}
-								onSuccess={() => setPEsucess(true)}
-								onError={(html) => {
-									setPEsucess(false);
-									setPEerror(getErrorFromHTML(html))
-								}}
+								onSuccess={() => setTVsuccess(true) }
+								onError={() => { setTVsuccess(false) }}
 							/>
 						</div>
 				</div>
@@ -95,7 +92,19 @@ export default function PropagationError(props: {
 							props.setExpand(true);
 							props.setFocusedInput(InputType.approxValue)
 						}}
+						ref={props.focusedInput === InputType.approxValue ? props.currentInputRef : undefined}
 					/>
+					<div className="Tex2SVGContainer"
+							style={{display: AVsuccess && props.approxValue ? "block" : "none"}}
+						>
+							<Tex2SVG 
+								class="Tex2SVG"
+								display="inline" 
+								latex={String(props.approxValue) || ""}
+								onSuccess={() => setAVsuccess(true) }
+								onError={() => { setAVsuccess(false) }}
+							/>
+						</div>
 				</div>
 
 				<div

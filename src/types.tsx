@@ -1,13 +1,13 @@
 import { roundingchopping } from "./enums";
 
-export type PEValueProps = {
+export type PEprops = {
 	trueValue: string;
 	approxValue: string;
 	roundingchopping: roundingchopping;
 	numDigits: number;
 };
 
-export type TMValueProps = {
+export type TMprops = {
 	function: string;
 	point: number;
 	nthDegree: number;

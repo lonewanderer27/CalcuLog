@@ -2,35 +2,34 @@ import "./App.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header";
 import Keyboard from "./components/Keyboard";
-import PropagationError from "./PropagationError";
-import TaylorMaclaurin from "./TaylorMaclaurin";
+import PropagationError from "./components/Screens/PropagationError";
+import TaylorMaclaurin from "./components/Screens/TaylorMaclaurin";
 import { useState } from "react";
 import { InputType, markEnums, roundingchopping } from "./enums";
 import PESolution from "./components/Solutions/PESolution";
 import TMSolution from "./components/Solutions/TMSolution";
-import { PEValueProps, TMValueProps } from "./ValueProps";
+import { PEprops, TMprops } from "./types";
 import { useRef } from "react";
-
-export const getErrorFromHTML = (html: HTMLElement) =>
-  html.children[1].firstChild.firstChild.attributes["data-mjx-error"].value;
 
 function App() {
 	const [mark, setMark] = useState<markEnums>(() => markEnums.idle);
 	const [focusedInput, setFocusedInput] = useState<InputType>(InputType.none);
-	const [PEvalues, setPEValues] = useState<PEValueProps>(() => ({
+	const [PEvalues, setPEValues] = useState<PEprops>(() => ({
 		trueValue: "",
 		approxValue: "",
 		roundingchopping: roundingchopping.rounding,
 		numDigits: 0,
 	}));
-	const [TMvalues, setTMValues] = useState<TMValueProps>(() => ({
+	const [TMvalues, setTMValues] = useState<TMprops>(() => ({
 		function: "",
 		point: 0,
 		nthDegree: 0,
 	}));
-	const [TMerror, setTMerror] = useState<HTMLElement | undefined>();
+
 	const insertToInput = (input: string) => {
+		currentInputRef.current.focus();
 		switch(focusedInput){
+
 			case InputType.trueValue: {
 				setPEValues((prev) => {
 					return {

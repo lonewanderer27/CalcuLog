@@ -4,6 +4,12 @@ export enum markEnums {
 	taylorMaclaurin = "TAYLOR_MACLAURIN",
 }
 
+export enum buttonType {
+	submitBtn = "submitBtn",
+	removeBtn = "removeBtn",
+	backBtn = "backBtn"
+}
+
 export enum roundingchopping {
 	chopping = "CHOPPING",
 	rounding = "ROUNDING",
