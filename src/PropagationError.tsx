@@ -93,7 +93,8 @@ export default function PropagationError(props: {
 						/>
 					</div>
 				</div>
-
+			</div>
+			<div className="footer">
 				<button className="button submitBtn" onClick={() => solve()}>
 					Submit
 				</button>

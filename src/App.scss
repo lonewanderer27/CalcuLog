@@ -74,7 +74,6 @@
 	text-align: left;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 
 	.title {
 		font-size: 30px;
@@ -86,6 +85,7 @@
 		flex-direction: column;
 		align-content: center;
 		justify-content: center;
+		margin-bottom: auto;
 	}
 	.footer {
 		display: flex;
