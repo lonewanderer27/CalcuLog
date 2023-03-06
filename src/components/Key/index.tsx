@@ -33,7 +33,6 @@ export default function Key(props: {
       backgroundColor: determineBGColor(),
       color: determineColor()
     }} onClick={props.onClick}>
-      {/* {props.value} */}
       <Text2SVG
         display="inline"
         latex={props.value}

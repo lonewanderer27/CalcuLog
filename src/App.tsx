@@ -13,7 +13,6 @@ import { useRef } from "react";
 
 function App() {
 	const [mark, setMark] = useState<markEnums>(() => markEnums.idle);
-	const [focusedInput, setFocusedInput] = useState<InputType>(InputType.none);
 	const [PEvalues, setPEValues] = useState<PEprops>(() => ({
 		trueValue: "",
 		approxValue: "",
@@ -57,6 +56,7 @@ function App() {
 		}
 	}
 
+	const [focusedInput, setFocusedInput] = useState<InputType>(InputType.none);
 	const currentInputRef = useRef(null);
 	const [expand, setExpand] = useState(false);
 	const toggleExpand = () => setExpand((prev) => !prev);

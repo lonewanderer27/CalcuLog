@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Key from "../Key";
 import { numKeys, letterKeys, specialKeys } from "./layout";
+import { KeyType } from "../../enums";
 
 export default function Keyboard(props: {
 	expand: boolean;
@@ -105,12 +106,16 @@ export default function Keyboard(props: {
 							})}
 						</Col>
 						<Col>
-						{letterKeys.slice(9, 12).map((value) => {
+							{letterKeys.slice(9, 11).map((value) => {
 								return <Key value={value.value} type={value.type} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
 							})}
+							<Key value="\%" type={KeyType.letter} onClick={() => {
+								retainFocus();
+								props.inserToInput("%");
+							}} />
 						</Col>
 					</Col>
 					<Col xs={3}>
@@ -139,12 +144,16 @@ export default function Keyboard(props: {
 							})}
 						</Col>
 						<Col>
-							{specialKeys.slice(9, 12).map((value) => {
+							{specialKeys.slice(9, 11).map((value) => {
 								return <Key value={value.value} type={value.type} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
 							})}
+							<Key value="e" type={KeyType.special} onClick={() => {
+								retainFocus();
+								props.inserToInput("2.71828");
+							}} />
 						</Col>
 					</Col>
 				</Row>
