@@ -43,3 +43,13 @@ export const specialKeys = [
   {value: "x^{y}", type: KeyType.special},
   {value: "x_y", type: KeyType.special},
 ]
+
+export const secondSpecial  = [
+  {value: "f'(x)", type: KeyType.secondspecial, latex: false},
+  {value: "f''(x)", type: KeyType.secondspecial, latex: false},
+  {value: "f^{(k)}(x)", type: KeyType.secondspecial, latex: false},
+  {value: "\\int", type: KeyType.secondspecial, latex: false},
+  {value: "\\int_{a}^b f(x)dx", type: KeyType.secondspecial, latex: false},
+  {value: "\\iint", type: KeyType.secondspecial, latex: false},
+  {value: "\\lim_{x \to +\infty} f(x)", type: KeyType.secondspecial, latex: false},
+]

@@ -4,7 +4,7 @@ import Styles from "./index.module.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Key from "../Key";
-import { numKeys, letterKeys, specialKeys } from "./layout";
+import { numKeys, letterKeys, specialKeys, secondSpecial } from "./layout";
 import { KeyType } from "../../enums";
 
 export default function Keyboard(props: {
@@ -154,6 +154,30 @@ export default function Keyboard(props: {
 								retainFocus();
 								props.inserToInput("2.71828");
 							}} />
+						</Col>
+					</Col>
+					<Col xs={3}>
+						<Col>
+							{secondSpecial.slice(0, 3).map((value) => {
+								return <Key value={value.value} type={value.type} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
+						</Col>
+						<Col>
+							{secondSpecial.slice(3, 6).map((value) => {
+								return <Key value={value.value} type={value.type} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
+							{secondSpecial.slice(6,7).map((value) => {
+								return <Key value={value.value} type={value.type} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
 						</Col>
 					</Col>
 				</Row>
