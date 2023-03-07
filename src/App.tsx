@@ -7,8 +7,8 @@ import PropagationError from "./components/Screens/PropagationError";
 import TaylorMaclaurin from "./components/Screens/TaylorMaclaurin";
 import { useState } from "react";
 import { InputType, markEnums, roundingchopping } from "./enums";
-import PESolution from "./components/Solutions/PESolution";
-import TMSolution from "./components/Solutions/TMSolution";
+import PEAnswer from "./components/Answers/PEAnswer";
+import TMAnswer from "./components/Answers/TMAnswer";
 import { PEprops, TMprops } from "./types";
 import { useRef } from "react";
 import { useCaretPosition } from 'react-use-caret-position';
@@ -108,7 +108,7 @@ function App() {
 					{...PEvalues}
 				/>
 			)}
-			{mark === markEnums.propagationError && <PESolution PEvalues={PEvalues} />}
+			{mark === markEnums.propagationError && <PEAnswer PEvalues={PEvalues} />}
 
 			{mark !== markEnums.propagationError && (
 				<TaylorMaclaurin
@@ -126,7 +126,7 @@ function App() {
 					{...TMvalues}
 				/>
 			)}
-			{mark === markEnums.taylorMaclaurin && <TMSolution />}
+			{mark === markEnums.taylorMaclaurin && <TMAnswer />}
 
 			<Keyboard 
 				expand={expand}

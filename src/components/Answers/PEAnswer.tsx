@@ -1,10 +1,10 @@
-import { PEprops, WolframResponse } from "../../types";
+import { PEprops } from "../../types";
 import Spinner from "react-bootstrap/Spinner";
 import { useQuery } from "react-query";
 import Styles from "./index.module.scss";
 import axios from "axios";
 
-export default function PESolution(props: {PEvalues: PEprops}) {
+export default function PEAnswer(props: {PEvalues: PEprops}) {
 	const solve = async () => {
 		
 		let inputConvd = props.PEvalues.trueValue;
@@ -58,7 +58,7 @@ export default function PESolution(props: {PEvalues: PEprops}) {
 
 	return (
 		<div className="PESolution">
-			<span className="title">Solution</span>
+			<span className="title">Answer</span>
 			<p>
 				Here is the absolute and percentage relative error of the given true
 				value and approximate value.

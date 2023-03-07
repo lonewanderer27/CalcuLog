@@ -1,7 +1,7 @@
-export default function TMSolution() {
+export default function TMAnswer() {
 	return (
 		<div className="TMSolution">
-			<span className="title">Solution</span>
+			<span className="title">Answer</span>
 			<p>
 				Here is the absolute and percentage relative error of the given true
 				value and approximate value.
