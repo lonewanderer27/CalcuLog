@@ -8,3 +8,7 @@
   min-width: 100px;
   min-height: 60px;
 }
+
+.key:focus {
+  background-color: grey !important;
+}

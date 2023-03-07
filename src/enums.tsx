@@ -19,7 +19,8 @@ export enum KeyType {
 	number = "NUMBER",
 	letter = "LETTER",
 	special = "SPECIAL",
-	secondspecial = "SECONDSPECIAL"
+	secondspecial = "SECONDSPECIAL",
+	success = "SUCCESS"
 }
 
 export enum InputType {

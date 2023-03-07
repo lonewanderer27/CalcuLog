@@ -4,7 +4,7 @@ import Styles from "./index.module.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Key from "../Key";
-import { numKeys, letterKeys, specialKeys, secondSpecial } from "./layout";
+import { numKeys, letterKeys, specialKeys } from "./layout";
 import { KeyType } from "../../enums";
 
 export default function Keyboard(props: {
@@ -46,10 +46,10 @@ export default function Keyboard(props: {
 			</div>
 			{props.expand && <div className={Styles.keyboardBody}>
 				<Row>
-					<Col xs={3}>
+					<Col xs={4}>
 						<Col>
 							{numKeys.slice(0, 3).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -57,7 +57,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{numKeys.slice(3, 6).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -65,7 +65,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{numKeys.slice(6, 9).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -73,17 +73,17 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{numKeys.slice(9, 12).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
 							})}
 						</Col>
 					</Col>
-					<Col xs={3}>
+					<Col xs={4}>
 						<Col>
 						{letterKeys.slice(0, 3).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -91,7 +91,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 						{letterKeys.slice(3, 6).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -99,7 +99,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 						{letterKeys.slice(6, 9).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -107,21 +107,27 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{letterKeys.slice(9, 11).map((value) => {
-								return <Key value={value.value} latex={value.latex} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
 							})}
-							<Key value="\%" type={KeyType.letter} onClick={() => {
+							<Key value="π" type={KeyType.special} latex={false}
+							onClick={() => {
 								retainFocus();
-								props.inserToInput("%");
+								props.inserToInput("3.14159265359");
+							}} />
+							<Key value="e" type={KeyType.special} latex={false}
+							onClick={() => {
+								retainFocus();
+								props.inserToInput("2.71828182846");
 							}} />
 						</Col>
 					</Col>
-					<Col xs={3}>
+					<Col xs={4}>
 						<Col>
 							{specialKeys.slice(0, 3).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -129,7 +135,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{specialKeys.slice(3, 6).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -137,7 +143,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{specialKeys.slice(6, 9).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />
@@ -145,35 +151,7 @@ export default function Keyboard(props: {
 						</Col>
 						<Col>
 							{specialKeys.slice(9, 11).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-							<Key value="e" type={KeyType.special} onClick={() => {
-								retainFocus();
-								props.inserToInput("2.71828");
-							}} />
-						</Col>
-					</Col>
-					<Col xs={3}>
-						<Col>
-							{secondSpecial.slice(0, 3).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-						</Col>
-						<Col>
-							{secondSpecial.slice(3, 6).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-							{secondSpecial.slice(6,7).map((value) => {
-								return <Key value={value.value} type={value.type} onClick={() => {
+								return <Key {...value} onClick={() => {
 									retainFocus();
 									props.inserToInput(value.value)
 								}} />

@@ -66,6 +66,9 @@
 .removeBtn {
 	background-color: #ff4b40;
 }
+.disabledBtn {
+	background-color: grey;
+}
 
 .propagationError,
 .taylorMaclaurin,
@@ -104,6 +107,9 @@
 .PESolution {
 	grid-area: taylorMaclaurin;
 	margin: 20px 20px 20px 10px;
+	.body {
+		overflow-x: scroll;
+	}
 }
 
 .TMSolution {

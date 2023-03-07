@@ -16,7 +16,7 @@ export default function TaylorMaclaurin(props: {
 	expand: boolean;
 	setExpand: React.Dispatch<React.SetStateAction<boolean>>;
 	toggleExpand: () => void;
-	currentInputRef: React.MutableRefObject<null>;
+	currentInputRef: React.RefObject<HTMLInputElement>;
 	focusedInput: InputType;
 	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {

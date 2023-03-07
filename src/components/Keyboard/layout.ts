@@ -15,41 +15,35 @@ export const numKeys = [
   {value: ".", type: KeyType.number, latex: false},
 ]
 
-export const letterKeys = [
-  {value: "a", type: KeyType.letter, latex: false},
-  {value: "b", type: KeyType.letter, latex: false},
-  {value: "c", type: KeyType.letter, latex: false},
-  {value: "x", type: KeyType.letter, latex: false},
-  {value: "y", type: KeyType.letter, latex: false},
-  {value: "z", type: KeyType.letter, latex: false},
-  {value: "(", type: KeyType.letter, latex: false},
+export const specialKeys = [
+  {value: "+", type: KeyType.letter, latex: false},
+  {value: "-", type: KeyType.letter, latex: false},
+  {value: "*", type: KeyType.letter, latex: false},
+  {value: "/", type: KeyType.letter, latex: false},
   {value: "|", type: KeyType.letter, latex: false},
+  {value: "(", type: KeyType.letter, latex: false},
   {value: ")", type: KeyType.letter, latex: false},
   {value: "[", type: KeyType.letter, latex: false},
   {value: "]", type: KeyType.letter, latex: false},
-  {value: "%", type: KeyType.letter, latex: false},
 ]
 
-export const specialKeys = [
-  {value: "\\pi", type: KeyType.special},
-  {value: "\\log", type: KeyType.special},
-  {value: "\\log_{x}", type: KeyType.special},
-  {value: "\\ln", type: KeyType.special},
-  {value: "\\sqrt{x}", type: KeyType.special},
-  {value: "\\sqrt[x]{y}", type: KeyType.special},
-  {value: "f(x)", type: KeyType.special},
-  {value: "\\frac{x}{y}", type: KeyType.special},
-  {value: "{x}\\frac{y}{z}", type: KeyType.special},
-  {value: "x^{y}", type: KeyType.special},
-  {value: "x_y", type: KeyType.special},
+export const letterKeys = [
+  {value: "\\log(x)", type: KeyType.special, latex: true},
+  {value: "\\ln(x-1)", type: KeyType.special, latex: true},
+  {value: "\\sqrt{x}", type: KeyType.special, latex: true},
+  {value: "\\sqrt[x]{y}", type: KeyType.special, latex: true},
+  {value: "\\frac{x}{y}", type: KeyType.special, latex: true},
+  {value: "{x}\\frac{y}{z}", type: KeyType.special, latex: true},
+  {value: "x^{y}", type: KeyType.special, latex: true},
+  {value: "x_y", type: KeyType.special, latex: true},
 ]
 
-export const secondSpecial  = [
-  {value: "f'(x)", type: KeyType.secondspecial, latex: false},
-  {value: "f''(x)", type: KeyType.secondspecial, latex: false},
-  {value: "f^{(k)}(x)", type: KeyType.secondspecial, latex: false},
-  {value: "\\int", type: KeyType.secondspecial, latex: false},
-  {value: "\\int_{a}^b f(x)dx", type: KeyType.secondspecial, latex: false},
-  {value: "\\iint", type: KeyType.secondspecial, latex: false},
-  {value: "\\lim_{x \to +\infty} f(x)", type: KeyType.secondspecial, latex: false},
-]
+// export const secondSpecial  = [
+//   {value: "f'(x)", type: KeyType.secondspecial, latex: false},
+//   {value: "f''(x)", type: KeyType.secondspecial, latex: false},
+//   {value: "f^{(k)}(x)", type: KeyType.secondspecial, latex: false},
+//   {value: "\\int", type: KeyType.secondspecial, latex: false},
+//   {value: "\\int_{a}^b f(x)dx", type: KeyType.secondspecial, latex: false},
+//   {value: "\\iint", type: KeyType.secondspecial, latex: false},
+//   {value: "\\lim_{x \to +\infty} f(x)", type: KeyType.secondspecial, latex: false},
+// ]

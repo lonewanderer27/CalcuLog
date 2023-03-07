@@ -1,0 +1,1 @@
+export const WOLFRAM_APP_ID = "AKH6HG-X5HYXUX3QW";

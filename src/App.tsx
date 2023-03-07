@@ -1,5 +1,6 @@
 import "./App.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { QueryClient, QueryClientProvider } from "react-query";
 import Header from "./components/Header";
 import Keyboard from "./components/Keyboard";
 import PropagationError from "./components/Screens/PropagationError";
@@ -10,6 +11,13 @@ import PESolution from "./components/Solutions/PESolution";
 import TMSolution from "./components/Solutions/TMSolution";
 import { PEprops, TMprops } from "./types";
 import { useRef } from "react";
+import { useCaretPosition } from 'react-use-caret-position';
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: { cacheTime: 0, retry: false, refetchOnWindowFocus: false}
+	}
+});
 
 function App() {
 	const [mark, setMark] = useState<markEnums>(() => markEnums.idle);
@@ -28,7 +36,6 @@ function App() {
 	const insertToInput = (input: string) => {
 		currentInputRef.current.focus();
 		switch(focusedInput){
-
 			case InputType.trueValue: {
 				setPEValues((prev) => {
 					return {
@@ -81,6 +88,7 @@ function App() {
 	console.log("PEvalues:", PEvalues);
 
 	return (
+		<QueryClientProvider client={queryClient}>
 		<div className="App">
 			<Header />
 
@@ -100,7 +108,7 @@ function App() {
 					{...PEvalues}
 				/>
 			)}
-			{mark === markEnums.propagationError && <PESolution />}
+			{mark === markEnums.propagationError && <PESolution PEvalues={PEvalues} />}
 
 			{mark !== markEnums.propagationError && (
 				<TaylorMaclaurin
@@ -127,6 +135,7 @@ function App() {
 				inserToInput={insertToInput}
 			/>
 		</div>
+		</QueryClientProvider>
 	);
 }
 
