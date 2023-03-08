@@ -57,7 +57,7 @@ export default function PropagationError(props: {
 			console.log("prevVal", prevVal);
 			return {
 				...prevVal,
-				[event.target.name]: parseInt(event.target.value) ? Number(event.target.value) : event.target.value,
+				[event.target.name]: event.target.value,
 			};
 		});
 	};
