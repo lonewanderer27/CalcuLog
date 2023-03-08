@@ -73,7 +73,7 @@ export default function TMAnswer(props: { TMvalues: TMprops }) {
 						</div>
 						<div className="py-2">
 							<h5 className={Styles.title}>(Rounded) Absolute Error:</h5>
-							<span className={Styles.answer}>{data?.data.absolute_error_rounded}%</span>
+							<span className={Styles.answer}>{data?.data.absolute_error_rounded}</span>
 						</div>
 						<div className="py-2">
 							<h5 className={Styles.title}>(Rounded) Percentage Relative Error:</h5>
@@ -87,7 +87,7 @@ export default function TMAnswer(props: { TMvalues: TMprops }) {
 						</div>
 						<div className="py-2">
 							<h5 className={Styles.title}>(Chopped) Absolute Error:</h5>
-							<span className={Styles.answer}>{data?.data.absolute_error_chopped}%</span>
+							<span className={Styles.answer}>{data?.data.absolute_error_chopped}</span>
 						</div>
 						<div className="py-2">
 							<h5 className={Styles.title}>(Chopped) Percentage Relative Error:</h5>

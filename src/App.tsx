@@ -66,7 +66,7 @@ function App() {
 	}
 
 	const [focusedInput, setFocusedInput] = useState<InputType>(InputType.none);
-	const currentInputRef = useRef(null);
+	const currentInputRef = useRef(document.createElement("input"));
 	const [expand, setExpand] = useState(false);
 	const toggleExpand = () => setExpand((prev) => !prev);
 
