@@ -105,7 +105,7 @@ export default function PropagationError(props: {
 							<Tex2SVG 
 								class="Tex2SVG"
 								display="inline" 
-								latex={props.trueValue || ""}
+								latex={`${props.trueValue}`}
 								onSuccess={() => setTVsuccess(true) }
 								onError={() => { setTVsuccess(false) }}
 							/>
