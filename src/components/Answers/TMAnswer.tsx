@@ -9,7 +9,7 @@ import Styles from "./index.module.scss";
 export default function TMAnswer(props: { TMvalues: TMprops }) {
 	const solve = async () => {
 
-		const response = await axios.get("http://localhost:8000/api/v1/tm", {
+		const response = await axios.get("https://calcu-log-backend.vercel.app/api/v1/tm", {
 			params: {
 				"xvar": props.TMvalues.xvar,
 				"nthDegree": props.TMvalues.nthDegree,

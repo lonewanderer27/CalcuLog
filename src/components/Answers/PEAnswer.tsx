@@ -7,7 +7,7 @@ import axios from "axios";
 export default function PEAnswer(props: {PEvalues: PEprops}) {
 	const solve = async () => {
 
-		const response = await axios.get("http://localhost:8000/api/v2/pe", {
+		const response = await axios.get("https://calcu-log-backend.vercel.app/api/v2/pe", {
 			params: {
 				"trueValue": props.PEvalues.trueValue,
 				"roundingchopping": props.PEvalues.roundingchopping,
