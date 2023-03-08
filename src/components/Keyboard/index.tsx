@@ -5,13 +5,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Key from "../Key";
 import { numKeys, letterKeys, specialKeys } from "./layout";
-import { KeyType } from "../../enums";
+import { KeyType, markEnums, InputType } from "../../enums";
 
 export default function Keyboard(props: {
 	expand: boolean;
 	setExpand: React.Dispatch<React.SetStateAction<boolean>>;
 	toggleExpand: () => void;
 	inserToInput: (input: string) => void;
+	focusedInput: InputType;
 }) {
 
 	const retainFocus = () => {
@@ -82,37 +83,7 @@ export default function Keyboard(props: {
 					</Col>
 					<Col xs={4}>
 						<Col>
-						{letterKeys.slice(0, 3).map((value) => {
-								return <Key {...value} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-						</Col>
-						<Col>
-						{letterKeys.slice(3, 6).map((value) => {
-								return <Key {...value} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-						</Col>
-						<Col>
-						{letterKeys.slice(6, 9).map((value) => {
-								return <Key {...value} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-						</Col>
-						<Col>
-							{letterKeys.slice(9, 11).map((value) => {
-								return <Key {...value} onClick={() => {
-									retainFocus();
-									props.inserToInput(value.value)
-								}} />
-							})}
-							<Key value="π" type={KeyType.special} latex={false}
+						<Key value="π" type={KeyType.special} latex={false}
 							onClick={() => {
 								retainFocus();
 								props.inserToInput("3.14159265359");
@@ -122,6 +93,37 @@ export default function Keyboard(props: {
 								retainFocus();
 								props.inserToInput("2.71828182846");
 							}} />
+						{letterKeys.slice(0, 1).map((value) => {
+								return <Key {...value} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
+						</Col>
+						<Col>
+						{letterKeys.slice(1, 4).map((value) => {
+								return <Key {...value} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
+						</Col>
+						<Col>
+						{letterKeys.slice(4, 7).map((value) => {
+								return <Key {...value} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
+						</Col>
+						<Col>
+							{letterKeys.slice(7, 11).map((value) => {
+								return <Key {...value} onClick={() => {
+									retainFocus();
+									props.inserToInput(value.value)
+								}} />
+							})}
+
 						</Col>
 					</Col>
 					<Col xs={4}>

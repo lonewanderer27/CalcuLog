@@ -29,7 +29,7 @@ export const specialKeys = [
 
 export const letterKeys = [
   {value: "\\log(x)", type: KeyType.special, latex: true},
-  {value: "\\ln(x-1)", type: KeyType.special, latex: true},
+  {value: "\\ln(x+1)", type: KeyType.special, latex: true},
   {value: "\\sqrt{x}", type: KeyType.special, latex: true},
   {value: "\\sqrt[x]{y}", type: KeyType.special, latex: true},
   {value: "\\frac{x}{y}", type: KeyType.special, latex: true},

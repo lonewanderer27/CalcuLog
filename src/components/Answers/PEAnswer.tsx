@@ -6,12 +6,6 @@ import axios from "axios";
 
 export default function PEAnswer(props: {PEvalues: PEprops}) {
 	const solve = async () => {
-		
-		let inputConvd = props.PEvalues.trueValue;
-		// inputConvd = inputConvd.replaceAll("+", " add ");
-		// inputConvd = inputConvd.replaceAll("-", " minus ");
-		// inputConvd = inputConvd.replaceAll("*", " times ");
-		// inputConvd = inputConvd.replaceAll("/", " divide ")
 
 		const response = await axios.get("http://localhost:8000/api/v2/pe", {
 			params: {
@@ -26,7 +20,7 @@ export default function PEAnswer(props: {PEvalues: PEprops}) {
 	}   
 
 	const { isLoading, data, isRefetching, isError, error } = useQuery([
-		"wolfram", props.PEvalues.trueValue], solve
+		"wolfram"], solve
 	)
 
 	if (isError) return (

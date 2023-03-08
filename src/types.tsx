@@ -11,6 +11,8 @@ export type TMprops = {
 	function: string;
 	point: number;
 	nthDegree: number;
+	xvar: number;
+	numDigits: number;
 };
 
 export interface Subpod {

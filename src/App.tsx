@@ -11,7 +11,6 @@ import PEAnswer from "./components/Answers/PEAnswer";
 import TMAnswer from "./components/Answers/TMAnswer";
 import { PEprops, TMprops } from "./types";
 import { useRef } from "react";
-import { useCaretPosition } from 'react-use-caret-position';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -28,9 +27,12 @@ function App() {
 		numDigits: 0,
 	}));
 	const [TMvalues, setTMValues] = useState<TMprops>(() => ({
-		function: "",
+		function: "ln(x+1)",
 		point: 0,
 		nthDegree: 0,
+		xvar: 0,
+		roundingchopping: roundingchopping.rounding,
+		numDigits: 0,
 	}));
 
 	const insertToInput = (input: string) => {
@@ -81,11 +83,14 @@ function App() {
 				function: "",
 				point: 0,
 				nthDegree: 0,
+				xvar:0,
+				numDigits: 0,
 			}); break;
 		}
 	}
 
 	console.log("PEvalues:", PEvalues);
+	console.log("TMvalues:", TMvalues);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -105,8 +110,7 @@ function App() {
 					currentInputRef={currentInputRef}
 					focusedInput={focusedInput}
 					setFocusedInput={setFocusedInput}
-					{...PEvalues}
-				/>
+					{...PEvalues}				/>
 			)}
 			{mark === markEnums.propagationError && <PEAnswer PEvalues={PEvalues} />}
 
@@ -123,12 +127,12 @@ function App() {
 					currentInputRef={currentInputRef}
 					focusedInput={focusedInput}
 					setFocusedInput={setFocusedInput}
-					{...TMvalues}
-				/>
+					{...TMvalues}				/>
 			)}
-			{mark === markEnums.taylorMaclaurin && <TMAnswer />}
+			{mark === markEnums.taylorMaclaurin && <TMAnswer TMvalues={TMvalues} />}
 
 			<Keyboard 
+				focusedInput={focusedInput}
 				expand={expand}
 				setExpand={setExpand}
 				toggleExpand={toggleExpand}

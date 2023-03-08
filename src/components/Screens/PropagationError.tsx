@@ -11,8 +11,6 @@ export default function PropagationError(props: {
 	back: () => void;
 	trueValue: string;
 	approxValue: string;
-	rounding: boolean;
-	chopping: boolean;
 	numDigits: number;
 	setPEValues: React.Dispatch<React.SetStateAction<PEprops>>;
 	remove: (choice: number) => void;
@@ -23,49 +21,44 @@ export default function PropagationError(props: {
 	focusedInput: InputType;
 	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {
+	const [hasError, setHasError] = useState<boolean>(() => true);
 	const [TVsuccess, setTVsuccess] = useState<boolean>(() => false);
-	const [numDigitsSuccess, setNumDigitsSuccess] = useState<boolean>(() => false);
 	const [errorModal, setErrorModal] = useState<boolean>(() => false);
-	const [AVsuccess, setAVsuccess] = useState<boolean>(() => false);
-	const [answerState, setAnswerState] = useState()
 
 	const solve = () => {
-		props.setMark(markEnums.propagationError);
-	};
+		let validInputs = true;
+		if (props.numDigits < 0) {
+			validInputs = false;
+		} 
+		if (props.trueValue.length === 0 || 
+				props.trueValue === "" || 
+				props.trueValue.includes("x") ||
+				props.trueValue.includes("y") || 
+				props.trueValue.includes("z")) 
+		{
+			validInputs = false;
+			setTVsuccess(() => false);
+		} 
 
-	const showError = () => {
-		setErrorModal(() => true);
-	}
+		if (validInputs) {
+			props.setMark(markEnums.propagationError);
+			setErrorModal(() => false);
+		} else {
+			setErrorModal(() => true);
+		}
+	};
 
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
 		console.log(event);
+
 		props.setPEValues((prevVal) => {
 			console.log("prevVal", prevVal);
-
-			if (props.numDigits < 0) {
-				setNumDigitsSuccess(false);
-			} else {
-				setNumDigitsSuccess(true)
-			}
-			if (props.trueValue.length === 0 || props.trueValue === "") {
-				setTVsuccess(false);
-			} else {
-				setTVsuccess(true);
-			}
-
-			if (typeof event.target.value === "number") {
-				return {
-					...prevVal,
-					[event.target.name]: Number(event.target.value),
-				};
-			} else {
-				return {
-					...prevVal,
-					[event.target.name]: event.target.value,
-				};
-			}
+			return {
+				...prevVal,
+				[event.target.name]: parseInt(event.target.value) ? Number(event.target.value) : event.target.value,
+			};
 		});
 	};
 
@@ -76,9 +69,10 @@ export default function PropagationError(props: {
           <Modal.Title>Error</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+					{/* Make sure the True Value is valid, and the number of decimal places as well. */}
 					<ul>
-						{TVsuccess === false || props.trueValue === "" &&	 <li>Invalid formula in True Value input form</li>}
-						{numDigitsSuccess === false && <li>Invalid number in number of digits in input form</li>}
+						{props.numDigits < 0 && <li>Number of decimal places has to be 0 or more.</li>}
+						{!TVsuccess && <li>True Value has to be a valid number, or if it's an equation, check if you have replaced the placeholder x y z vars.</li>}
 					</ul>
 				</Modal.Body>
         <Modal.Footer>
@@ -118,33 +112,6 @@ export default function PropagationError(props: {
 						</div>
 				</div>
 
-				{/* <div className="inputGroup">
-					<label htmlFor="approxValue">Approximate Value</label>
-					<input
-						type="text"
-						name="approxValue"
-						id="approxValue"
-						value={props.approxValue}
-						onChange={handleChange}
-						onFocus={(e) => {
-							props.setExpand(true);
-							props.setFocusedInput(InputType.approxValue)
-						}}
-						ref={props.focusedInput === InputType.approxValue ? props.currentInputRef : undefined}
-					/>
-					<div className="Tex2SVGContainer"
-							style={{display: AVsuccess && props.approxValue ? "block" : "none"}}
-						>
-							<Tex2SVG 
-								class="Tex2SVG"
-								display="inline" 
-								latex={String(props.approxValue) || ""}
-								onSuccess={() => setAVsuccess(true) }
-								onError={() => { setAVsuccess(false) }}
-							/>
-						</div>
-				</div> */}
-
 				<div
 					style={{
 						display: "flex",
@@ -165,7 +132,7 @@ export default function PropagationError(props: {
 						</select>
 					</div>
 					<div className="inputGroup">
-						<label htmlFor="numDigits">Number of Digits</label>
+						<label htmlFor="numDigits">Number of Decimal Places</label>
 						<input
 							readOnly={props.mark === markEnums.propagationError ? true : false}
 							disabled={props.mark === markEnums.propagationError ? true : false}
@@ -181,10 +148,7 @@ export default function PropagationError(props: {
 			</div>
 			<div className="footer">
 				{props.mark === markEnums.idle && (
-					<button 
-						className={`button ${TVsuccess && numDigitsSuccess ? "submitBtn" : "disabledBtn"}`} 
-						onClick={() => {TVsuccess && numDigitsSuccess ? solve() : showError()}}
-					>
+					<button className="button submitBtn" onClick={() => solve()}>
 						Submit
 					</button>)}
 				{props.mark === markEnums.idle && (

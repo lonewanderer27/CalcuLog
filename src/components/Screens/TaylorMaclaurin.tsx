@@ -2,15 +2,19 @@ import { markEnums, InputType, buttonType } from "../../enums";
 import { TMprops } from "../../types";
 import { useState } from "react";
 import Tex2SVG from "react-hook-mathjax";
+import Modal from "react-bootstrap/Modal";
 import Button from "../../components/Button";
+import {Button as BootstrapButton} from "react-bootstrap";
 
 export default function TaylorMaclaurin(props: {
 	mark: markEnums;
 	setMark: React.Dispatch<React.SetStateAction<markEnums>>;
 	back: () => void;
-	function?: string;
-	point?: number;
-	nthDegree?: number;
+	function: string;
+	xvar: number;
+	point: number;
+	numDigits: number;
+	nthDegree: number;
 	setTMValues: React.Dispatch<React.SetStateAction<TMprops>>;
 	remove: (choice: number) => void;
 	expand: boolean;
@@ -20,57 +24,80 @@ export default function TaylorMaclaurin(props: {
 	focusedInput: InputType;
 	setFocusedInput: React.Dispatch<React.SetStateAction<InputType>>
 }) {
-	const [FSuccess, setFSuccess] = useState<boolean>(false);
+	const [FSuccess, setFSuccess] = useState<boolean>(() => true);
+	const [xVarSuccess, setxVarSuccess] = useState<boolean>(() => true);
+	const [nthDegreeSuccess, setnthDegreeSuccess] = useState<boolean>(() => true);
+	const [errorModal, setErrorModal] = useState<boolean>(() => false);
 
 	const solve = () => {
-		props.setMark(markEnums.taylorMaclaurin);
+		let validInputs = true;
+
+		if (props.nthDegree < 1){
+			validInputs = false;
+			setnthDegreeSuccess(() => false);
+		}
+
+		if (props.numDigits < 0){
+			validInputs = false;
+		}
+
+		if (props.xvar <= 0){
+			validInputs = false;
+			setxVarSuccess(() => false);
+		}
+
+		if (validInputs) {
+			props.setMark(markEnums.taylorMaclaurin);
+			setErrorModal(() => false);
+		} else {
+			setErrorModal(() => true);
+		}
 	};
 
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
 		console.log(event);
+
 		props.setTMValues((prevVal) => {
 			console.log("prevVal", prevVal);
-			if (typeof event.target.value === "number") {
-				return {
-					...prevVal,
-					[event.target.name]: Number(event.target.value),
-				};
-			} else {
-				return {
-					...prevVal,
-					[event.target.name]: event.target.value,
-				};
-			}
+
+			return {
+				...prevVal,
+				[event.target.name]: parseInt(event.target.value) ? Number(event.target.value) : event.target.value,
+			};
 		});
 	};
 
 	return (
 		<div className="taylorMaclaurin">
+			<Modal show={errorModal} onHide={() => setErrorModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+					<ul>
+						{props.numDigits < 0 && <li>Number of decimal places has to be 0 or more.</li>}
+						{nthDegreeSuccess === false && <li>Invalid nthDegree value</li>}
+						{xVarSuccess === false && <li>x variable must be a non-negative or non-zero number</li>}
+					</ul>
+				</Modal.Body>
+        <Modal.Footer>
+          <BootstrapButton variant="secondary" onClick={() => setErrorModal(false)}>
+            Close
+          </BootstrapButton>
+        </Modal.Footer>
+      </Modal>
 			<span className="title">Taylor Maclaurin</span>
 			<div className="body">
 				<div className="inputGroup">
-					<label htmlFor="function">Enter a function</label>
-					<input
-						type="text"
-						name="function"
-						id="function"
-						value={props.function}
-						onChange={handleChange}
-						onFocus={(e) => {
-							props.setExpand(true);
-							props.setFocusedInput(InputType.function)
-						}}
-						ref={props.focusedInput === InputType.function ? props.currentInputRef : undefined}
-					/>
-					<div className="Tex2SVGContainer"
-							style={{display: FSuccess && props.function ? "block" : "none"}}
-						>
+					<label htmlFor="function">Function</label>
+					<div className="Tex2SVGContainer">
+							<span style={{display: "absolute", top: 0, right: 0, color: "black"}}>Preview: </span>
 							<Tex2SVG 
 								class="Tex2SVG"
 								display="inline" 
-								latex={props.function || ""}
+								latex={`\\ln(${props.xvar === 0 ? "x" : props.xvar}+1)`}
 								onSuccess={() => setFSuccess(true)}
 								onError={() => {setFSuccess(false)}}
 							/>
@@ -79,9 +106,11 @@ export default function TaylorMaclaurin(props: {
 
 				<div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
 					<div className="inputGroup">
-						<label htmlFor="point">Enter a point</label>
+						<label htmlFor="point">Point (For Maclaurin, it's set to 0 by default) </label>
 						<input
-							type="text"
+							readOnly={true}
+							disabled={true}
+							type="number"
 							name="point"
 							id="point"
 							value={props.point}
@@ -89,7 +118,16 @@ export default function TaylorMaclaurin(props: {
 						/>
 					</div>
 					<div className="inputGroup">
-						<label htmlFor="">(For Maclaurin, set point to 0.)</label>
+						<label htmlFor="nthDegree">Number of Decimal Places</label>
+						<input
+							readOnly={props.mark === markEnums.taylorMaclaurin ? true : false}
+							disabled={props.mark === markEnums.taylorMaclaurin ? true : false}
+							type="number"
+							name="numDigits"
+							id="numDigits"
+							value={props.numDigits}
+							onChange={handleChange}
+						/>
 					</div>
 				</div>
 
@@ -97,6 +135,8 @@ export default function TaylorMaclaurin(props: {
 					<div className="inputGroup">
 						<label htmlFor="nthDegree">nthDegree</label>
 						<input
+							readOnly={props.mark === markEnums.taylorMaclaurin ? true : false}
+							disabled={props.mark === markEnums.taylorMaclaurin ? true : false}
 							type="number"
 							name="nthDegree"
 							id="nthDegree"
@@ -104,13 +144,35 @@ export default function TaylorMaclaurin(props: {
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="inputGroup"></div>
+					<div className="inputGroup">
+						<label htmlFor="nthDegree">x variable</label>
+						<input
+							readOnly={props.mark === markEnums.taylorMaclaurin ? true : false}
+							disabled={props.mark === markEnums.taylorMaclaurin ? true : false}
+							type="number"
+							name="xvar"
+							id="xvar"
+							value={props.xvar}
+							onChange={handleChange}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className="footer">
-				<Button buttonType={buttonType.submitBtn} onClick={() => solve()} />
-				{props.mark === markEnums.idle && <Button buttonType={buttonType.removeBtn} onClick={() => props.remove(2)} /> }
-				{props.mark === markEnums.taylorMaclaurin && <Button buttonType={buttonType.backBtn} onClick={() => props.back} /> }
+				{props.mark === markEnums.idle && (
+					<button className="button submitBtn" onClick={() => solve()}>
+						Submit
+					</button>)}
+				{props.mark === markEnums.idle && (
+					<button className="button removeBtn" onClick={()=>props.remove(1)}>
+						Remove
+					</button>
+				)}
+				{props.mark === markEnums.taylorMaclaurin && (
+					<button className="button backBtn" onClick={props.back}>
+						Back
+					</button>
+				)}
 			</div>
 		</div>
 	);
