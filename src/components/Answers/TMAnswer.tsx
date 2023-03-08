@@ -63,12 +63,6 @@ export default function TMAnswer(props: { TMvalues: TMprops }) {
 							<span className={Styles.answer}>{data?.data.true_value}</span>
 						</div>
 					</Col>
-					<Col>
-						<div className="py-2">
-							<h5 className={Styles.title}>Approximated Value:</h5>
-							<span className={Styles.answer}>{data?.data.approx_value}</span>
-						</div>
-					</Col>
 				</Row>
 
 				<Row>

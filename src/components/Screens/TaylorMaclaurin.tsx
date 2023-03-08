@@ -78,7 +78,7 @@ export default function TaylorMaclaurin(props: {
         <Modal.Body>
 					<ul>
 						{props.numDigits < 0 && <li>Number of decimal places has to be 0 or more.</li>}
-						{nthDegreeSuccess === false && <li>Invalid nthDegree value</li>}
+						{nthDegreeSuccess === false && <li>nthDegree must be greater than 0</li>}
 						{xVarSuccess === false && <li>x variable must be a non-negative or non-zero number</li>}
 					</ul>
 				</Modal.Body>
@@ -97,7 +97,7 @@ export default function TaylorMaclaurin(props: {
 							<Tex2SVG 
 								class="Tex2SVG"
 								display="inline" 
-								latex={`\\ln(${props.xvar === 0 ? "x" : props.xvar}+1)`}
+								latex="\\ln(x+1)"
 								onSuccess={() => setFSuccess(true)}
 								onError={() => {setFSuccess(false)}}
 							/>
