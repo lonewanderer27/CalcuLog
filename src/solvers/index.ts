@@ -1,4 +1,4 @@
-import { roundingchopping } from "./enums"
+import { roundingchopping } from "../enums"
 
 /**
  * Rounds a given number to the specified number of decimal places.
@@ -7,7 +7,7 @@ import { roundingchopping } from "./enums"
  * @param decimalPlaces - The number of decimal places to round the number to.
  * @returns The rounded number.
  */
-const round = (number: number, decimalPlaces: number) => {
+export const round = (number: number, decimalPlaces: number) => {
   // Calculate the factor of 10 to multiply by in order to round the number.
   const factorOfTen = Math.pow(10, decimalPlaces)
 
@@ -17,7 +17,7 @@ const round = (number: number, decimalPlaces: number) => {
 }
 
 
-function truncate(number: number, digits: number): number {
+export function truncate(number: number, digits: number): number {
   // Determine the number of decimal places in the number to be truncated
   const numDecimals = number.toString().split('.')[1]?.length ?? 0
 
@@ -38,7 +38,7 @@ function truncate(number: number, digits: number): number {
 }
 
 
-function parseRoundingChopping(value: number, roundorchop: roundingchopping, numDigits: number): number[] {
+export function parseRoundingChopping(value: number, roundorchop: roundingchopping, numDigits: number): number[] {
   if (roundorchop === roundingchopping.rounding) {
     return [round(value, numDigits), truncate(value, numDigits)]
   }
