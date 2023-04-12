@@ -7,6 +7,17 @@ body {
   height: 100vh;
 }
 
+.infoBtn {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.logo {
+  width: 72px;
+  height: auto;
+}
+
 .form-control, .form-select {
   border-radius: 0px !important;
   border: 1px solid black;
@@ -39,6 +50,7 @@ h3 {
   bottom: 0;
   width: 85%;
   margin: auto;
+  cursor: pointer;
 }
 
 .pe, .tm {
