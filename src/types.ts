@@ -1,9 +1,20 @@
 import { roundingchopping } from "./enums";
 
+export type PEvaluesValidity = {
+	numDigits: boolean;
+	trueValue: boolean;
+	nthDegree: boolean;
+}
+
+export type TMvaluesValidity = {
+	numDigits: boolean;
+	nthDegree: boolean;
+	xvar: boolean;
+}
+
 export type PEprops = {
 	trueValue: string;
 	approxValue: string;
-	roundingchopping: roundingchopping;
 	numDigits: number;
 };
 

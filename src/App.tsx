@@ -13,8 +13,12 @@ import { useState } from 'react'
 function App() {
   const [screen, setScreen] = useState(() => markEnums.idle)
 
-  const ansPE = () => setScreen(() => markEnums.peAns);
-  const ansTM = () => setScreen(() => markEnums.tmAns);
+  const ansPE = () => {
+    setScreen(() => markEnums.peAns);
+  };
+  const ansTM = () => {
+    setScreen(() => markEnums.tmAns);
+  };
   const ansIdle = () => setScreen(() => markEnums.idle);
 
   const [PEvalues, setPEValues] = useState<PEprops>(() => ({

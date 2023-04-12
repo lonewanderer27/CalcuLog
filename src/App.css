@@ -20,6 +20,10 @@ body {
   border-bottom: 1px solid black;
 }
 
+h2 {
+  font-weight: 700;
+}
+
 h3 {
   color: #333333;
   font-weight: 900;
