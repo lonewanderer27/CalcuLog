@@ -16,6 +16,7 @@ export type PEprops = {
 	trueValue: string;
 	approxValue: string;
 	numDigits: number;
+	roundingchopping: roundingchopping
 };
 
 export type TMprops = {

@@ -12,7 +12,7 @@ export default function PEInput(props: {
   approxValue: string;
   roundingchopping: roundingchopping;
   numDigits: number;
-  handlePEChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePEChange: (e: React.ChangeEvent) => void;
 }) {
   const handleAns = () => {
     if (props.screen === markEnums.peAns) {

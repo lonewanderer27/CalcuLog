@@ -21,17 +21,8 @@ function App() {
   };
   const ansIdle = () => setScreen(() => markEnums.idle);
 
-  const [PEvalues, setPEValues] = useState<PEprops>(() => ({
-		trueValue: "",
-		approxValue: "",
-		roundingchopping: roundingchopping.rounding,
-		numDigits: 0,
-	}));
-	const [TMvalues, setTMValues] = useState<TMprops>(() => ({
-    numDigits: 0,
-		nthDegree: 0,
-		xvar: 0,
-	}));
+  const [PEvalues, setPEValues] = useState<PEprops>(() => defaultPEVals);
+	const [TMvalues, setTMValues] = useState<TMprops>(() => defaultTMVals);
 
   const handlePEChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(e)
