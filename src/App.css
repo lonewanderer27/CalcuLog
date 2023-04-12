@@ -46,9 +46,6 @@ h3 {
 
 .keyboard {
   border-top: 1px solid black;
-  position: absolute;
-  bottom: 0;
-  width: 85%;
   margin: auto;
   cursor: pointer;
 }

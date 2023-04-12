@@ -66,7 +66,7 @@ function App() {
   console.log("screen: ", screen)
 
   return (
-    <div className="App container">
+    <div className="App container d-flex flex-column justify-content-between">
       <div className="row">
       <Header/>
       </div>
