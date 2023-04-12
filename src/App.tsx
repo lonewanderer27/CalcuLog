@@ -30,8 +30,8 @@ function App() {
   }
 
   const defaultTMVals = {
-      nthDegree: 0,
-      xvar: 0,
+      nthDegree: 1,
+      xvar: 1,
       numDigits: 0,
   }
 
@@ -67,8 +67,10 @@ function App() {
   const clearInputs = (screen: markEnums) => {
     if (screen === markEnums.pe) {
       setPEValues(() => defaultPEVals);
+      setPEValuesValid(() => checkPEVals(defaultPEVals));
     } else if (screen === markEnums.tm) {
       setTMValues(() => defaultTMVals);
+      setTMValuesValid(() => checkTMVals(defaultTMVals));
     }
   }
 

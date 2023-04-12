@@ -59,7 +59,7 @@ export default function TMInput(props: {
             <div className="col-6 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>x variable</Form.Label>
-                <Form.Control name="xvar" value={props.xvar} type="number" onChange={props.handleTMChange} {...handleAns()} />
+                <Form.Control name="xvar" value={props.xvar} type="number" min={1} onChange={props.handleTMChange} {...handleAns()} />
               </Form.Group>
             </div>
           </div>
