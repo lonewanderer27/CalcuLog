@@ -8,7 +8,7 @@ export default function PEAnswer() {
         <h3>Propagation Error</h3> 
         <Form>
           <div className="row">
-            <div className="col-12 col-xl-6">
+            <div className="col-12">
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>True Value</Form.Label>
                 <Form.Control type="text" />
