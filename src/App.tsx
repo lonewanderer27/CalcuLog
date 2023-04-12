@@ -21,6 +21,19 @@ function App() {
   };
   const ansIdle = () => setScreen(() => markEnums.idle);
 
+  const defaultPEVals = {
+    trueValue: "",
+    approxValue: "",
+    roundingchopping: roundingchopping.rounding,
+    numDigits: 0,
+  }
+
+  const defaultTMVals = {
+      nthDegree: 0,
+      xvar: 0,
+      numDigits: 0,
+  }
+
   const [PEvalues, setPEValues] = useState<PEprops>(() => defaultPEVals);
 	const [TMvalues, setTMValues] = useState<TMprops>(() => defaultTMVals);
 
@@ -38,19 +51,6 @@ function App() {
       ...prev,
       [e.target.name]: e.target.value,
     }))
-  }
-
-  const defaultPEVals = {
-    trueValue: "",
-    approxValue: "",
-    roundingchopping: roundingchopping.rounding,
-    numDigits: 0,
-  }
-
-  const defaultTMVals = {
-      nthDegree: 0,
-      xvar: 0,
-      numDigits: 0,
   }
 
   const clearInputs = (screen: markEnums) => {
