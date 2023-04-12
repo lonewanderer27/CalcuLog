@@ -12,6 +12,16 @@ export default function TMInput(props: {
   xvar: number;
   handleTMChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  const handleAns = () => {
+    if (props.screen === markEnums.tmAns) {
+      return {
+        readOnly: true,
+        disabled: true,
+        title: "Click Back button to change this"
+      }
+    }
+  }
+
   return (
     <div className="col-12 col-lg-6 p-0 p-sm-2">
       <div className="tm p-4">
@@ -21,7 +31,7 @@ export default function TMInput(props: {
             <div className="col-12">
               <Form.Group className="mb-3">
                 <Form.Label>Function</Form.Label>
-                <Form.Control readOnly disabled value={"ln(x+1)"} type="text"/>
+                <Form.Control readOnly disabled value={"ln(x+1)"} type="text" title="Natural Logarithm is the default function" />
               </Form.Group>
             </div>
           </div>
@@ -29,25 +39,25 @@ export default function TMInput(props: {
             <div className="col-12 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>Point</Form.Label>
-                <Form.Control readOnly disabled type="number" placeholder="0" />
+                <Form.Control readOnly disabled type="number" placeholder="0" title="Taylor's Polynomial requires point to be 0" />
               </Form.Group>
             </div>
             <div className="col-12 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>Number of Decimal Places</Form.Label>
-                <Form.Control name="numDigits" value={props.numDigits} type="number" onChange={props.handleTMChange}  />
+                <Form.Control name="numDigits" value={props.numDigits} type="number" onChange={props.handleTMChange} {...handleAns()} />
               </Form.Group>
             </div>
             <div className="col-6 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>nthDegree</Form.Label>
-                <Form.Control name="nthDegree" value={props.nthDegree} type="number" onChange={props.handleTMChange}  />
+                <Form.Control name="nthDegree" value={props.nthDegree} type="number" onChange={props.handleTMChange} {...handleAns()} />
               </Form.Group>
             </div>
             <div className="col-6 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>x variable</Form.Label>
-                <Form.Control name="xvar" value={props.xvar} type="number" onChange={props.handleTMChange}  />
+                <Form.Control name="xvar" value={props.xvar} type="number" onChange={props.handleTMChange} {...handleAns()} />
               </Form.Group>
             </div>
           </div>
