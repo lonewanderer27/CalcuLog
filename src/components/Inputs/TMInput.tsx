@@ -66,6 +66,7 @@ export default function TMInput(props: {
         </Form>
         <div className="mt-auto">
           <ControlBtns 
+            hasError={false}
             handleClear={() => props.clearInputs(markEnums.tm)} 
             screen={props.screen} 
             handleSubmit={() => props.ansTM()}

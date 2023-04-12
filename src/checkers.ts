@@ -13,6 +13,10 @@ export function checkPEVals(PEvalues: PEprops): PEvaluesValidity {
     inputValidity.numDigits = false;
   } 
 
+  if (PEvalues.trueValue.length === 0) {
+    inputValidity.trueValue = false
+  }
+
   console.log("evaluating true value in PE")
   try {
     evaluate(PEvalues.trueValue)

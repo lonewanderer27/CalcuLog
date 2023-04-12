@@ -2,7 +2,7 @@ import { roundingchopping } from "./enums";
 
 export let defaultPEValidity = {
   numDigits: true,
-  trueValue: true,
+  trueValue: false,
   nthDegree: true,
 };
 

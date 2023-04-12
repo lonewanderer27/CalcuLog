@@ -70,6 +70,7 @@ export default function PEInput(props: {
         </Form>
         <div className="mt-auto">
           <ControlBtns 
+            hasError={props.PEvaluesValidity.trueValue !== true ? true : false}
             handleClear={() => props.clearInputs(markEnums.pe)} 
             screen={props.screen} 
             handleSubmit={() => props.ansPE()}
