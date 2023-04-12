@@ -1,15 +1,34 @@
 import { roundingchopping } from "./enums";
 
+export let defaultPEValidity = {
+  numDigits: true,
+  trueValue: true,
+  nthDegree: true,
+};
+
+export let defaultTMValidity = {
+  numDigits: true,
+  nthDegree: true,
+  xvar: true,
+};
+
+export type errorMessagesType = {
+	numDigits?: boolean | string,
+	trueValue?: boolean | string,
+	nthDegree?: boolean | string,
+	xvar?: boolean | string
+}
+
 export type PEvaluesValidity = {
-	numDigits: boolean;
-	trueValue: boolean;
-	nthDegree: boolean;
+	numDigits: boolean | string;
+	trueValue: boolean | string;
+	nthDegree: boolean | string;
 }
 
 export type TMvaluesValidity = {
-	numDigits: boolean;
-	nthDegree: boolean;
-	xvar: boolean;
+	numDigits: boolean | string;
+	nthDegree: boolean | string;
+	xvar: boolean | string;
 }
 
 export type PEprops = {

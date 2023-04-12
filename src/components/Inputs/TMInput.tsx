@@ -1,5 +1,6 @@
 import ControlBtns from '../ControlBtns';
 import Form from 'react-bootstrap/Form';
+import { TMvaluesValidity } from '../../types';
 import { markEnums } from '../../enums';
 
 export default function TMInput(props: {
@@ -11,6 +12,7 @@ export default function TMInput(props: {
   nthDegree: number;
   xvar: number;
   handleTMChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  TMvaluesValidity: TMvaluesValidity;
 }) {
   const handleAns = () => {
     if (props.screen === markEnums.tmAns) {
@@ -45,13 +47,13 @@ export default function TMInput(props: {
             <div className="col-12 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>Number of Decimal Places</Form.Label>
-                <Form.Control name="numDigits" value={props.numDigits} type="number" onChange={props.handleTMChange} {...handleAns()} />
+                <Form.Control name="numDigits" value={props.numDigits} type="number" min={0} onChange={props.handleTMChange} {...handleAns()} />
               </Form.Group>
             </div>
             <div className="col-6 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>nthDegree</Form.Label>
-                <Form.Control name="nthDegree" value={props.nthDegree} type="number" onChange={props.handleTMChange} {...handleAns()} />
+                <Form.Control name="nthDegree" value={props.nthDegree} type="number" min={1} onChange={props.handleTMChange} {...handleAns()} />
               </Form.Group>
             </div>
             <div className="col-6 col-xl-6">

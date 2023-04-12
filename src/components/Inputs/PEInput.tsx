@@ -2,6 +2,7 @@ import { markEnums, roundingchopping } from '../../enums';
 
 import ControlBtns from '../ControlBtns';
 import Form from 'react-bootstrap/Form';
+import { PEvaluesValidity } from '../../types';
 
 export default function PEInput(props: {
   screen: markEnums;
@@ -12,6 +13,7 @@ export default function PEInput(props: {
   approxValue: string;
   roundingchopping: roundingchopping;
   numDigits: number;
+  PEvaluesValidity: PEvaluesValidity;
   handlePEChange: (e: React.ChangeEvent) => void;
 }) {
   const handleAns = () => {
@@ -39,7 +41,12 @@ export default function PEInput(props: {
                   value={props.trueValue} 
                   onChange={props.handlePEChange} 
                   {...handleAns()}
+                  
                 />
+              {props.PEvaluesValidity.trueValue !== true && 
+                <Form.Text style={{color: "red"}}>
+                  Invalid true value
+                </Form.Text>}
               </Form.Group>
             </div>
           </div>
@@ -56,7 +63,7 @@ export default function PEInput(props: {
             <div className="col-12 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>Number of Decimal Places</Form.Label>
-                <Form.Control name="numDigits" value={props.numDigits} type="number" placeholder="5" onChange={props.handlePEChange} {...handleAns()} />
+                <Form.Control name="numDigits" value={props.numDigits} type="number" placeholder="5" min={0} onChange={props.handlePEChange} {...handleAns()} />
               </Form.Group>
             </div>
           </div>

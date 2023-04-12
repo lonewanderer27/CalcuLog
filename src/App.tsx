@@ -1,6 +1,7 @@
 import './App.css'
 
-import { PEprops, TMprops } from './types';
+import { PEprops, PEvaluesValidity, TMprops, TMvaluesValidity, defaultPEValidity, defaultTMValidity } from './types';
+import { checkPEVals, checkTMVals } from './checkers';
 import { markEnums, roundingchopping } from './enums';
 
 import Header from './components/Header';
@@ -36,21 +37,31 @@ function App() {
 
   const [PEvalues, setPEValues] = useState<PEprops>(() => defaultPEVals);
 	const [TMvalues, setTMValues] = useState<TMprops>(() => defaultTMVals);
+  const [PEvaluesValid, setPEValuesValid] = useState<PEvaluesValidity>(() => defaultPEValidity);
+  const [TMvaluesValid, setTMValuesValid] = useState<TMvaluesValidity>(() => defaultTMValidity);
 
   const handlePEChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(e)
-    setPEValues((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
+    setPEValues((prev) => {
+      const newState = {
+        ...prev,
+        [e.target.name]: e.target.value,
+      }
+      setPEValuesValid(checkPEVals(newState))
+      return newState;
+    })
   }
 
   const handleTMChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e)
-    setTMValues((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
+    setTMValues((prev) => {
+      const newState = {
+        ...prev,
+        [e.target.name]: e.target.value
+      }
+      setTMValuesValid(checkTMVals(newState))
+      return newState;
+    })
   }
 
   const clearInputs = (screen: markEnums) => {
@@ -63,6 +74,10 @@ function App() {
 
   console.table(PEvalues)
   console.table(TMvalues)
+  console.log("PEvaluesValid")
+  console.table(PEvaluesValid)
+  console.log("TMvaluesValid")
+  console.table(TMvaluesValid)
   console.log("screen: ", screen)
 
   return (
@@ -78,6 +93,7 @@ function App() {
           ansPE={ansPE} 
           ansIdle={ansIdle} 
           handlePEChange={handlePEChange}
+          PEvaluesValidity={PEvaluesValid}
           {...PEvalues} 
         />}
         {(screen === markEnums.peAns) && 
@@ -91,6 +107,7 @@ function App() {
           ansTM={ansTM} 
           ansIdle={ansIdle} 
           handleTMChange={handleTMChange}
+          TMvaluesValidity={TMvaluesValid}
           {...TMvalues} 
         />}
         {(screen === markEnums.tmAns) && 
