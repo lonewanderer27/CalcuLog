@@ -4,16 +4,18 @@ import { PEAnsprops, PEinputsValidity, PEprops, TMAnsprops, TMinputsValidity, TM
 import { checkPEVals, checkTMVals } from './checkers';
 import { defaultPEAns, defaultPEVals, defaultTMAns, defaultTMVals } from './constants';
 import { markEnums, roundingchopping } from './enums';
+import { useEffect, useState } from 'react'
 
 import Header from './components/Header';
 import PEInput from './components/Inputs/PEInput';
 import PESolution from './components/Solutions/PESolution';
 import TMInput from './components/Inputs/TMInput';
 import TMSolution from './components/Solutions/TMSolution';
-import { useState } from 'react'
+import pe from './solvers/pe';
+import tm from './solvers/tm';
 
 function App() {
-  const [screen, setScreen] = useState(() => markEnums.idle)
+  const [screen, setScreen] = useState<markEnums>(() => markEnums.idle)
 
   const ansPE = () => {
     setScreen(() => markEnums.peAns);
@@ -27,9 +29,21 @@ function App() {
 	const [TMinputs, setTMInputs] = useState<TMprops>(() => defaultTMVals);
   const [PEinputsValid, setPEInputsValid] = useState<PEinputsValidity>(() => defaultPEValidity);
   const [TMinputsValid, setTMInputsValid] = useState<TMinputsValidity>(() => defaultTMValidity);
-
   const [PEanswers, setPEanswers] = useState<PEAnsprops>(() => defaultPEAns);
   const [TManswers, setTManswers] = useState<TMAnsprops>(() => defaultTMAns);
+
+  useEffect(() => {
+    switch(screen) {
+      case markEnums.peAns: {
+        setPEanswers(() => pe(PEinputs.trueValue, PEinputs.roundingchopping, PEinputs.numDigits))
+      }; break;
+      case markEnums.tmAns: {
+        setTManswers(() => tm(TMinputs.xvar, TMinputs.nthDegree, TMinputs.numDigits))
+      }; break;
+    }
+  }, [PEinputs, TMinputs, PEinputsValid, TMinputsValid, screen])
+
+
 
   const handlePEChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(e)
@@ -72,6 +86,9 @@ function App() {
   console.log("TMvaluesValid")
   console.table(TMinputsValid)
   console.log("screen: ", screen)
+  console.log("Answers:")
+  // console.table(PEanswers)
+  // console.table(TManswers)
 
   return (
     <div className="App container d-flex flex-column justify-content-between">
@@ -89,10 +106,7 @@ function App() {
           PEvaluesValidity={PEinputsValid}
           {...PEinputs} 
         />}
-        {(screen === markEnums.peAns) && 
-        <PESolution 
-          {...PEanswers}
-        />}
+        {(screen === markEnums.peAns) && <PESolution {...PEanswers}/>}
         {(screen === markEnums.idle || screen === markEnums.tm || screen === markEnums.tmAns) && 
         <TMInput 
           clearInputs={clearInputs} 
@@ -103,10 +117,7 @@ function App() {
           TMvaluesValidity={TMinputsValid}
           {...TMinputs} 
         />}
-        {(screen === markEnums.tmAns) && 
-        <TMSolution 
-          {...TManswers}
-        />}
+        {(screen === markEnums.tmAns) && <TMSolution {...TManswers} />}
       </div>
       <div className="row">
         <Keyboard/>

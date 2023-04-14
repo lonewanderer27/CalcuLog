@@ -15,6 +15,7 @@ export enum buttonType {
 export enum roundingchopping {
 	chopping = "CHOPPING",
 	rounding = "ROUNDING",
+	both = "BOTH"
 }
 
 export enum KeyType {

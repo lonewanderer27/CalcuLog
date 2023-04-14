@@ -34,16 +34,17 @@ export type TMinputsValidity = {
 export type PEAnsprops = {
 	approxValue:number,
 	absoluteError: number,
-	percentRelativeError: number 
+	percentageRelativeError: number 
 }
 
 export type TMAnsprops = {
+	trueVal: number,
 	approxValueRounded: number,
 	absoluteErrorRounded: number,
-	percentRelativeErrorRounded: number,
+	percentageRelativeErrorRounded: number,
 	approxValueChopped: number,
 	absoluteErrorChopped: number,
-	percentRelativeErrorChopped: number
+	percentageRelativeErrorChopped: number
 }
 
 export type PEprops = {

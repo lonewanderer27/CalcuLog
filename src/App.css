@@ -4,7 +4,7 @@ body {
 } 
 
 #root, .App {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .infoBtn {
@@ -63,4 +63,12 @@ h3 {
 .tm {
   height: 100%;
   background-color: #a6c6e4;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-underline {
+  text-decoration: underline;
 }

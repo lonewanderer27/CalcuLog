@@ -31,7 +31,7 @@ export default function Header() {
           </p>
         </Modal.Body>
       </Modal>
-      <div className="col-1 justify-content-center align-items-center">
+      <div className="col-2 justify-content-center align-items-center">
         
       </div>
       <div className="col">
@@ -39,7 +39,7 @@ export default function Header() {
           <h2>CalcuLog <sup>v2</sup></h2>
         </div>
       </div>
-      <div className="col-1 d-flex justify-content-center align-items-center">
+      <div className="col-2 d-flex justify-content-center align-items-center">
         <img src="/info-square-fill.svg" className="infoBtn" onClick={() => handleOpen()} title="Click to view About info" />
       </div>
     </div>

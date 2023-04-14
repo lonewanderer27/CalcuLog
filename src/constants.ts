@@ -18,14 +18,15 @@ export const defaultTMVals = {
 export const defaultPEAns:PEAnsprops = {
   approxValue: 0,
   absoluteError: 0,
-  percentRelativeError: 0
+  percentageRelativeError: 0
 }
 
 export const defaultTMAns:TMAnsprops = {
+  trueVal: 0,
   approxValueRounded: 0,
   absoluteErrorRounded: 0,
-  percentRelativeErrorRounded: 0,
+  percentageRelativeErrorRounded: 0,
   approxValueChopped: 0,
   absoluteErrorChopped: 0,
-  percentRelativeErrorChopped: 0
+  percentageRelativeErrorChopped: 0,
 }

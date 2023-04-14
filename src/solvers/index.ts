@@ -38,15 +38,27 @@ export function truncate(number: number, digits: number): number {
 }
 
 
+/**
+ * Rounds or chops a given number to a specified number of digits, according to the specified rounding or chopping mode.
+ *
+ * @param value The number to round or chop.
+ * @param roundorchop The type of rounding or chopping to apply to the number.
+ * @param numDigits The number of digits to round or chop the number to.
+ * @returns An array containing the rounded or chopped value of the number.
+ */
 export function parseRoundingChopping(value: number, roundorchop: roundingchopping, numDigits: number): number[] {
-  if (roundorchop === roundingchopping.rounding) {
-    return [round(value, numDigits), truncate(value, numDigits)]
+  // Check the specified rounding or chopping mode and apply the corresponding rounding or chopping function.
+  if (roundorchop === roundingchopping.both) {
+    // If both rounding and chopping are specified, apply both functions and return an array of both results.
+    return [round(value, numDigits), truncate(value, numDigits)];
   }
   else if (roundorchop === roundingchopping.chopping) {
-    return [truncate(value, numDigits)]
+    // If only chopping is specified, apply the truncate function and return an array containing the result.
+    return [truncate(value, numDigits)];
   }
-  else {
-    return [round(value, numDigits)]
+  else if (roundorchop === roundingchopping.rounding) {
+    // If only rounding is specified, apply the round function and return an array containing the result.
+    return [round(value, numDigits)];
   }
 }
 
