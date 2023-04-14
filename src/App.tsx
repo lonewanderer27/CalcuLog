@@ -1,7 +1,8 @@
 import './App.css'
 
-import { PEprops, PEvaluesValidity, TMprops, TMvaluesValidity, defaultPEValidity, defaultTMValidity } from './types';
+import { PEAnsprops, PEinputsValidity, PEprops, TMAnsprops, TMinputsValidity, TMprops, defaultPEValidity, defaultTMValidity } from './types';
 import { checkPEVals, checkTMVals } from './checkers';
+import { defaultPEAns, defaultPEVals, defaultTMAns, defaultTMVals } from './constants';
 import { markEnums, roundingchopping } from './enums';
 
 import Header from './components/Header';
@@ -22,64 +23,54 @@ function App() {
   };
   const ansIdle = () => setScreen(() => markEnums.idle);
 
-  const defaultPEVals = {
-    trueValue: "",
-    approxValue: "",
-    roundingchopping: roundingchopping.rounding,
-    numDigits: 0,
-  }
+  const [PEinputs, setPEInputs] = useState<PEprops>(() => defaultPEVals);
+	const [TMinputs, setTMInputs] = useState<TMprops>(() => defaultTMVals);
+  const [PEinputsValid, setPEInputsValid] = useState<PEinputsValidity>(() => defaultPEValidity);
+  const [TMinputsValid, setTMInputsValid] = useState<TMinputsValidity>(() => defaultTMValidity);
 
-  const defaultTMVals = {
-      nthDegree: 1,
-      xvar: 1,
-      numDigits: 0,
-  }
-
-  const [PEvalues, setPEValues] = useState<PEprops>(() => defaultPEVals);
-	const [TMvalues, setTMValues] = useState<TMprops>(() => defaultTMVals);
-  const [PEvaluesValid, setPEValuesValid] = useState<PEvaluesValidity>(() => defaultPEValidity);
-  const [TMvaluesValid, setTMValuesValid] = useState<TMvaluesValidity>(() => defaultTMValidity);
+  const [PEanswers, setPEanswers] = useState<PEAnsprops>(() => defaultPEAns);
+  const [TManswers, setTManswers] = useState<TMAnsprops>(() => defaultTMAns);
 
   const handlePEChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(e)
-    setPEValues((prev) => {
+    setPEInputs((prev) => {
       const newState = {
         ...prev,
         [e.target.name]: e.target.value,
       }
-      setPEValuesValid(checkPEVals(newState))
+      setPEInputsValid(checkPEVals(newState))
       return newState;
     })
   }
 
   const handleTMChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e)
-    setTMValues((prev) => {
+    setTMInputs((prev) => {
       const newState = {
         ...prev,
         [e.target.name]: e.target.value
       }
-      setTMValuesValid(checkTMVals(newState))
+      setTMInputsValid(checkTMVals(newState))
       return newState;
     })
   }
 
   const clearInputs = (screen: markEnums) => {
     if (screen === markEnums.pe) {
-      setPEValues(() => defaultPEVals);
-      setPEValuesValid(() => checkPEVals(defaultPEVals));
+      setPEInputs(() => defaultPEVals);
+      setPEInputsValid(() => checkPEVals(defaultPEVals));
     } else if (screen === markEnums.tm) {
-      setTMValues(() => defaultTMVals);
-      setTMValuesValid(() => checkTMVals(defaultTMVals));
+      setTMInputs(() => defaultTMVals);
+      setTMInputsValid(() => checkTMVals(defaultTMVals));
     }
   }
 
-  console.table(PEvalues)
-  console.table(TMvalues)
+  console.table(PEinputs)
+  console.table(TMinputs)
   console.log("PEvaluesValid")
-  console.table(PEvaluesValid)
+  console.table(PEinputsValid)
   console.log("TMvaluesValid")
-  console.table(TMvaluesValid)
+  console.table(TMinputsValid)
   console.log("screen: ", screen)
 
   return (
@@ -95,12 +86,12 @@ function App() {
           ansPE={ansPE} 
           ansIdle={ansIdle} 
           handlePEChange={handlePEChange}
-          PEvaluesValidity={PEvaluesValid}
-          {...PEvalues} 
+          PEvaluesValidity={PEinputsValid}
+          {...PEinputs} 
         />}
         {(screen === markEnums.peAns) && 
         <PESolution 
-        
+          {...PEanswers}
         />}
         {(screen === markEnums.idle || screen === markEnums.tm || screen === markEnums.tmAns) && 
         <TMInput 
@@ -109,12 +100,12 @@ function App() {
           ansTM={ansTM} 
           ansIdle={ansIdle} 
           handleTMChange={handleTMChange}
-          TMvaluesValidity={TMvaluesValid}
-          {...TMvalues} 
+          TMvaluesValidity={TMinputsValid}
+          {...TMinputs} 
         />}
         {(screen === markEnums.tmAns) && 
         <TMSolution 
-        
+          {...TManswers}
         />}
       </div>
       <div className="row">

@@ -19,16 +19,31 @@ export type errorMessagesType = {
 	xvar?: boolean | string
 }
 
-export type PEvaluesValidity = {
+export type PEinputsValidity = {
 	numDigits: boolean | string;
 	trueValue: boolean | string;
 	nthDegree: boolean | string;
 }
 
-export type TMvaluesValidity = {
+export type TMinputsValidity = {
 	numDigits: boolean | string;
 	nthDegree: boolean | string;
 	xvar: boolean | string;
+}
+
+export type PEAnsprops = {
+	approxValue:number,
+	absoluteError: number,
+	percentRelativeError: number 
+}
+
+export type TMAnsprops = {
+	approxValueRounded: number,
+	absoluteErrorRounded: number,
+	percentRelativeErrorRounded: number,
+	approxValueChopped: number,
+	absoluteErrorChopped: number,
+	percentRelativeErrorChopped: number
 }
 
 export type PEprops = {

@@ -1,8 +1,8 @@
-import { PEprops, PEvaluesValidity, TMprops, TMvaluesValidity, defaultPEValidity, defaultTMValidity } from "./types";
+import { PEinputsValidity, PEprops, TMinputsValidity, TMprops, defaultPEValidity, defaultTMValidity } from "./types";
 
 import { evaluate } from "mathjs";
 
-export function checkPEVals(PEvalues: PEprops): PEvaluesValidity {
+export function checkPEVals(PEvalues: PEprops): PEinputsValidity {
   let inputValidity = {
     numDigits: true,
     trueValue: true,
@@ -28,7 +28,7 @@ export function checkPEVals(PEvalues: PEprops): PEvaluesValidity {
   return inputValidity
 }
 
-export function checkTMVals(TMvalues: TMprops): TMvaluesValidity {
+export function checkTMVals(TMvalues: TMprops): TMinputsValidity {
   let inputValidity = {
     numDigits: true,
     nthDegree: true,

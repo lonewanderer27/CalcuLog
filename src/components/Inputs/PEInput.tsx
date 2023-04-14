@@ -2,7 +2,7 @@ import { markEnums, roundingchopping } from '../../enums';
 
 import ControlBtns from '../ControlBtns';
 import Form from 'react-bootstrap/Form';
-import { PEvaluesValidity } from '../../types';
+import { PEinputsValidity } from '../../types';
 
 export default function PEInput(props: {
   screen: markEnums;
@@ -13,7 +13,7 @@ export default function PEInput(props: {
   approxValue: string;
   roundingchopping: roundingchopping;
   numDigits: number;
-  PEvaluesValidity: PEvaluesValidity;
+  PEvaluesValidity: PEinputsValidity;
   handlePEChange: (e: React.ChangeEvent) => void;
 }) {
   const handleAns = () => {

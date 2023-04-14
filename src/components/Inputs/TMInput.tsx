@@ -1,6 +1,6 @@
 import ControlBtns from '../ControlBtns';
 import Form from 'react-bootstrap/Form';
-import { TMvaluesValidity } from '../../types';
+import { TMinputsValidity } from '../../types';
 import { markEnums } from '../../enums';
 
 export default function TMInput(props: {
@@ -12,7 +12,7 @@ export default function TMInput(props: {
   nthDegree: number;
   xvar: number;
   handleTMChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  TMvaluesValidity: TMvaluesValidity;
+  TMvaluesValidity: TMinputsValidity;
 }) {
   const handleAns = () => {
     if (props.screen === markEnums.tmAns) {
