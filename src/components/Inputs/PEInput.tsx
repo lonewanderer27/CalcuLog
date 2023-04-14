@@ -56,7 +56,6 @@ export default function PEInput(props: {
                   onChange={props.handlePEChange} 
                   {...handleAns()}
                 />
-                {props.KB}
                 {props.PEvaluesValidity.trueValue === true && <div className="Tex2SVGContainer">
                   <span style={{display: "absolute", top: 0, right: 0, color: "black"}}>Preview: </span>
                   <Tex2SVG 
@@ -65,6 +64,7 @@ export default function PEInput(props: {
                     latex={`${props.trueValue}`}
                   />
                 </div>}
+                {props.KB}
                 {props.PEvaluesValidity.trueValue !== true && props.trueValue.length > 0 && 
                   <Form.Text style={{color: "red"}}>
                     Invalid true value
