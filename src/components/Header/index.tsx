@@ -11,7 +11,7 @@ export default function Header() {
     <div className="header row">
       <Modal show={showAbout} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>About CalcuLog <sup>v2</sup> </Modal.Title>
+          <Modal.Title>About CalcuLog</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center align-items-center flex-column px-5"  style={{textAlign: "justify"}}>
           <img src="/vite.svg" className="logo pt-3 pb-4" />
@@ -29,6 +29,7 @@ export default function Header() {
               <li>Adriane James</li>
             </ul>
           </p>
+          <h5>Version Number: <span>2</span></h5>
         </Modal.Body>
       </Modal>
       <div className="col-2 justify-content-center align-items-center">
@@ -36,7 +37,7 @@ export default function Header() {
       </div>
       <div className="col">
         <div className="text-center pt-2">
-          <h2>CalcuLog <sup>v2</sup></h2>
+          <h2>CalcuLog</h2>
         </div>
       </div>
       <div className="col-2 d-flex justify-content-center align-items-center">

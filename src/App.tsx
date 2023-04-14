@@ -93,7 +93,7 @@ function App() {
   return (
     <div className="App container d-flex flex-column justify-content-between">
       <div className="row">
-      <Header/>
+        <Header/>
       </div>
       <div className="row p-0 p-sm-4">
         {(screen === markEnums.idle || screen === markEnums.pe || screen === markEnums.peAns) && 
