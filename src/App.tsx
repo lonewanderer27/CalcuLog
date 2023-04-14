@@ -108,9 +108,9 @@ function App() {
         theme={"hg-theme-default hg-layout-default myTheme"}
         layout={{
           default: [
-            "1 2 3 4 5 6 7 8 9 0 {bksp}",
-            "{tab} π ℯ log(x) sqrt(x) (x/y) f(x)",
-            "[ ] + - * / , . {enter}"
+            "1 2 3 4 5 6 7 8 9 0",
+            "π ℯ log(x) sqrt(x) (x/y) f(x)",
+            "[ ] + - * / , . {bksp}"
           ],
         }}
       />
