@@ -3,6 +3,8 @@ import { markEnums, roundingchopping } from '../../enums';
 import ControlBtns from '../ControlBtns';
 import Form from 'react-bootstrap/Form';
 import { PEinputsValidity } from '../../types';
+import React from 'react';
+import Tex2SVG from "react-hook-mathjax";
 
 export default function PEInput(props: {
   screen: markEnums;
@@ -15,6 +17,7 @@ export default function PEInput(props: {
   numDigits: number;
   PEvaluesValidity: PEinputsValidity;
   handlePEChange: (e: React.ChangeEvent) => void;
+  KB: React.ReactChild;
 }) {
   const handleAns = () => {
     if (props.screen === markEnums.peAns) {
@@ -24,6 +27,17 @@ export default function PEInput(props: {
         title: "Click Back button to change this"
       }
     }
+  }
+
+  const convertSymbols = (input: string) => {
+    return input.replace(/pi|e/gi, (match: string) => {
+      if (match.toLowerCase() === "pi") {
+        return "π";
+      }
+      if (match.toLowerCase() === "e") {
+        return "ℯ";
+      }
+    })
   }
 
   return (
@@ -38,15 +52,23 @@ export default function PEInput(props: {
                 <Form.Control 
                   name="trueValue" 
                   type="text" 
-                  value={props.trueValue} 
+                  value={convertSymbols(props.trueValue)} 
                   onChange={props.handlePEChange} 
                   {...handleAns()}
-                  
                 />
-              {props.PEvaluesValidity.trueValue !== true && 
-                <Form.Text style={{color: "red"}}>
-                  Invalid true value
-                </Form.Text>}
+                {props.KB}
+                {props.PEvaluesValidity.trueValue === true && <div className="Tex2SVGContainer">
+                  <span style={{display: "absolute", top: 0, right: 0, color: "black"}}>Preview: </span>
+                  <Tex2SVG 
+                    class="Tex2SVG"
+                    display="inline" 
+                    latex={`${props.trueValue}`}
+                  />
+                </div>}
+                {props.PEvaluesValidity.trueValue !== true && props.trueValue.length > 0 && 
+                  <Form.Text style={{color: "red"}}>
+                    Invalid true value
+                  </Form.Text>}
               </Form.Group>
             </div>
           </div>

@@ -40,11 +40,11 @@ h3 {
   font-weight: 900;
 }
 
-.header, .keyboard {
+.header, .bottom-toolbar {
   background-color: #d6d6d6;
 }
 
-.keyboard {
+.bottom-toolbar {
   border-top: 1px solid black;
   margin: auto;
   cursor: pointer;
@@ -71,4 +71,28 @@ h3 {
 
 .text-underline {
   text-decoration: underline;
+}
+
+.Tex2SVGContainer {
+	width: 100%;
+	background-color: white;
+	padding: 10px 5px;
+	border: 1px solid black;	
+}
+
+
+.hg-theme-default.myTheme {
+  /* border-radius: 10px; */
+  margin: 10px 0 10px 0;
+  width: 100%;
+}
+
+.hg-layout-default .hg-button.hg-red {
+  background: rgb(255, 0, 0, 0.7);
+  color: white;
+}
+
+.hg-layout-default .hg-button.hg-highlight {
+  box-shadow: 0px 0px 40px 5px rgba(255, 255, 0, 0.5);
+  z-index: 1;
 }

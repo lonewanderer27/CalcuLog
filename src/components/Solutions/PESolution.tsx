@@ -32,7 +32,7 @@ export default function PESolution(props: PEAnsprops) {
           >
             <div className="ms-2 me-auto">
               <div className="fw-bold">Percentage Relative Error</div>
-              {props.percentageRelativeError}
+              {props.percentageRelativeError}%
             </div>
           </ListGroup.Item>
         </ListGroup>

@@ -40,8 +40,12 @@ export default function Header() {
           <h2>CalcuLog</h2>
         </div>
       </div>
-      <div className="col-2 d-flex justify-content-center align-items-center">
-        <img src="/info-square-fill.svg" className="infoBtn" onClick={() => handleOpen()} title="Click to view About info" />
+      <div className="col-2 d-flex justify-content-around align-items-center">
+        <img 
+          src="/info-square-fill.svg" 
+          className="infoBtn" onClick={() => handleOpen()} 
+          title="Click to view About info" 
+        />
       </div>
     </div>
   )

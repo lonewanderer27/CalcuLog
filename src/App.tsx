@@ -1,4 +1,5 @@
 import './App.css'
+import "react-simple-keyboard/build/css/index.css";
 
 import { PEAnsprops, PEinputsValidity, PEprops, TMAnsprops, TMinputsValidity, TMprops, defaultPEValidity, defaultTMValidity } from './types';
 import { checkPEVals, checkTMVals } from './checkers';
@@ -6,7 +7,9 @@ import { defaultPEAns, defaultPEVals, defaultTMAns, defaultTMVals } from './cons
 import { markEnums, roundingchopping } from './enums';
 import { useEffect, useState } from 'react'
 
+import BottomToolbar from './components/BottomToolbar';
 import Header from './components/Header';
+import Keyboard from "react-simple-keyboard"
 import PEInput from './components/Inputs/PEInput';
 import PESolution from './components/Solutions/PESolution';
 import TMInput from './components/Inputs/TMInput';
@@ -35,6 +38,7 @@ function App() {
   useEffect(() => {
     switch(screen) {
       case markEnums.peAns: {
+        
         setPEanswers(() => pe(PEinputs.trueValue, PEinputs.roundingchopping, PEinputs.numDigits))
       }; break;
       case markEnums.tmAns: {
@@ -43,7 +47,16 @@ function App() {
     }
   }, [PEinputs, TMinputs, PEinputsValid, TMinputsValid, screen])
 
-
+  const handleSimplePEChange = (input: string) => {
+    setPEInputs((prev) => {
+      const newState = {
+        ...prev,
+        trueValue: input,
+      }
+      setPEInputsValid(checkPEVals(newState))
+      return newState;
+    })
+  }
 
   const handlePEChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(e)
@@ -87,8 +100,22 @@ function App() {
   console.table(TMinputsValid)
   console.log("screen: ", screen)
   console.log("Answers:")
-  // console.table(PEanswers)
-  // console.table(TManswers)
+
+  const KB = () => {
+    return (
+      <Keyboard
+        onChange={input => handleSimplePEChange(input)}
+        theme={"hg-theme-default hg-layout-default myTheme"}
+        layout={{
+          default: [
+            "1 2 3 4 5 6 7 8 9 0 {bksp}",
+            "{tab} π ℯ log(x) sqrt(x) (x/y) f(x)",
+            "[ ] + - * / , . {enter}"
+          ],
+        }}
+      />
+    )
+  }
 
   return (
     <div className="App container d-flex flex-column justify-content-between">
@@ -104,6 +131,7 @@ function App() {
           ansIdle={ansIdle} 
           handlePEChange={handlePEChange}
           PEvaluesValidity={PEinputsValid}
+          KB={KB()}
           {...PEinputs} 
         />}
         {(screen === markEnums.peAns) && <PESolution {...PEanswers}/>}
@@ -120,16 +148,8 @@ function App() {
         {(screen === markEnums.tmAns) && <TMSolution {...TManswers} />}
       </div>
       <div className="row">
-        <Keyboard/>
+        {/* <BottomToolbar/> */}
       </div>
-    </div>
-  )
-}
-
-function Keyboard() {
-  return (
-    <div className="keyboard text-center pt-2">
-      <h2>Click to open keyboard</h2>
     </div>
   )
 }
