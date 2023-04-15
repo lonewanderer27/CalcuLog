@@ -54,7 +54,7 @@ export default function PEInput(props: {
                     latex={`${props.trueValue}`}
                   />
                 </div>} */}
-                {props.KB}
+                {props.screen === markEnums.idle && props.KB}
                 {props.PEvaluesValidity.trueValue !== true && props.trueValue.length > 0 && 
                   <Form.Text style={{color: "red"}}>
                     Invalid true value
