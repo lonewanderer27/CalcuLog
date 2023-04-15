@@ -5,7 +5,7 @@ import { PEAnsprops, PEinputsValidity, PEprops, TMAnsprops, TMinputsValidity, TM
 import { checkPEVals, checkTMVals } from './checkers';
 import { defaultPEAns, defaultPEVals, defaultTMAns, defaultTMVals } from './constants';
 import { markEnums, roundingchopping } from './enums';
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import BottomToolbar from './components/BottomToolbar';
 import Header from './components/Header';
@@ -34,6 +34,7 @@ function App() {
   const [TMinputsValid, setTMInputsValid] = useState<TMinputsValidity>(() => defaultTMValidity);
   const [PEanswers, setPEanswers] = useState<PEAnsprops>(() => defaultPEAns);
   const [TManswers, setTManswers] = useState<TMAnsprops>(() => defaultTMAns);
+  const keyboard = useRef(null);
 
   useEffect(() => {
     switch(screen) {
@@ -47,11 +48,12 @@ function App() {
     }
   }, [PEinputs, TMinputs, PEinputsValid, TMinputsValid, screen])
 
-  const handleSimplePEChange = (input: string) => {
+  const handleKBPEChange = (input: string) => {
+    const newTrueValue = convertFromSymbols(input); 
     setPEInputs((prev) => {
       const newState = {
         ...prev,
-        trueValue: input,
+        trueValue: newTrueValue,
       }
       setPEInputsValid(checkPEVals(newState))
       return newState;
@@ -60,11 +62,13 @@ function App() {
 
   const handlePEChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(e)
+    const newTrueValue = convertFromSymbols(e.target.value)
     setPEInputs((prev) => {
       const newState = {
         ...prev,
-        [e.target.name]: e.target.value,
+        [e.target.name]: newTrueValue
       }
+      keyboard.current.setInput(newTrueValue)
       setPEInputsValid(checkPEVals(newState))
       return newState;
     })
@@ -104,13 +108,14 @@ function App() {
   const KB = () => {
     return (
       <Keyboard
-        onChange={input => handleSimplePEChange(input)}
+        keyboardRef={r => (keyboard.current = r)}
+        onChange={input => handleKBPEChange(input)}
         theme={"hg-theme-default hg-layout-default myTheme"}
         layout={{
           default: [
             "1 2 3 4 5 6 7 8 9 0",
-            "π ℯ log(x) sqrt(x) (x/y) f(x)",
-            "[ ] + - * / , . {bksp}"
+            "[ π ℯ log(x) sqrt(x) (x/y) ]",
+            "( + - * / , . )"
           ],
         }}
       />
@@ -155,3 +160,25 @@ function App() {
 }
 
 export default App
+
+export const convertToSymbols = (input: string) => {
+  return input.replace(/pi|e/gi, (match: string) => {
+    if (match.toLowerCase() === "pi") {
+      return "π";
+    }
+    if (match.toLowerCase() === "e") {
+      return "ℯ";
+    }
+  })
+}
+
+export const convertFromSymbols = (input:string) => {
+  return input.replace(/π|ℯ/gi, (match: string) => {
+    if (match.toLowerCase() === "π") {
+      return "pi";
+    }
+    if (match.toLowerCase() === "ℯ") {
+      return "e";
+    }
+  })
+}

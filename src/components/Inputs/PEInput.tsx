@@ -4,7 +4,8 @@ import ControlBtns from '../ControlBtns';
 import Form from 'react-bootstrap/Form';
 import { PEinputsValidity } from '../../types';
 import React from 'react';
-import Tex2SVG from "react-hook-mathjax";
+// import Tex2SVG from "react-hook-mathjax";
+import { convertToSymbols } from '../../App';
 
 export default function PEInput(props: {
   screen: markEnums;
@@ -29,17 +30,6 @@ export default function PEInput(props: {
     }
   }
 
-  const convertSymbols = (input: string) => {
-    return input.replace(/pi|e/gi, (match: string) => {
-      if (match.toLowerCase() === "pi") {
-        return "π";
-      }
-      if (match.toLowerCase() === "e") {
-        return "ℯ";
-      }
-    })
-  }
-
   return (
     <div className="col-12 col-lg-6 p-0 p-sm-2">
       <div className="pe p-4">
@@ -52,18 +42,18 @@ export default function PEInput(props: {
                 <Form.Control 
                   name="trueValue" 
                   type="text" 
-                  value={convertSymbols(props.trueValue)} 
+                  value={convertToSymbols(props.trueValue)} 
                   onChange={props.handlePEChange} 
                   {...handleAns()}
                 />
-                {props.PEvaluesValidity.trueValue === true && <div className="Tex2SVGContainer">
+                {/* {props.PEvaluesValidity.trueValue === true && <div className="Tex2SVGContainer">
                   <span style={{display: "absolute", top: 0, right: 0, color: "black"}}>Preview: </span>
                   <Tex2SVG 
                     class="Tex2SVG"
                     display="inline" 
                     latex={`${props.trueValue}`}
                   />
-                </div>}
+                </div>} */}
                 {props.KB}
                 {props.PEvaluesValidity.trueValue !== true && props.trueValue.length > 0 && 
                   <Form.Text style={{color: "red"}}>

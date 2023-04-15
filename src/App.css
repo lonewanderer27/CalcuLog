@@ -82,9 +82,13 @@ h3 {
 
 
 .hg-theme-default.myTheme {
-  /* border-radius: 10px; */
   margin: 10px 0 10px 0;
   width: 100%;
+  border-radius: 0px;
+}
+
+.hg-button {
+  border-radius: 0px !important;
 }
 
 .hg-layout-default .hg-button.hg-red {
