@@ -56,6 +56,18 @@ function App() {
     }
   }, [PEinputs, TMinputs, PEinputsValid, TMinputsValid, screen])
 
+  useEffect(() => {
+    const PEdata = JSON.parse(localStorage.getItem("calculog-pedata"))
+    if (PEdata) {
+      setPEInputs(PEdata)
+    }
+
+    const TMdata = JSON.parse(localStorage.getItem("calculog-tmdata"))
+    if (TMdata) {
+      setTMInputs(TMdata)
+    }
+  })
+
   const handleKBPEChange = (input: string) => {
     const newTrueValue = convertFromSymbols(input); 
     setPEInputs((prev) => {
@@ -64,6 +76,7 @@ function App() {
         trueValue: newTrueValue,
       }
       setPEInputsValid(checkPEVals(newState))
+      localStorage.setItem("calculog-pedata", JSON.stringify(newState))
       return newState;
     })
   }
@@ -78,6 +91,7 @@ function App() {
       }
       keyboard.current.setInput(newTrueValue)
       setPEInputsValid(checkPEVals(newState))
+      localStorage.setItem("calculog-pedata", JSON.stringify(newState))
       return newState;
     })
   }
@@ -90,6 +104,7 @@ function App() {
         [e.target.name]: e.target.value
       }
       setTMInputsValid(checkTMVals(newState))
+      localStorage.setItem("calculog-tmdata", JSON.stringify(newState))
       return newState;
     })
   }
