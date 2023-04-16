@@ -40,7 +40,11 @@ function App() {
     switch(screen) {
       case markEnums.peAns: {
         
-        setPEanswers(() => pe(PEinputs.trueValue, PEinputs.roundingchopping, PEinputs.numDigits))
+        setPEanswers(() => pe(
+          PEinputs.trueValue, 
+          PEinputs.roundingchopping, 
+          Number(PEinputs.numDigits)
+        ))
       }; break;
       case markEnums.tmAns: {
         setTManswers(() => tm(
