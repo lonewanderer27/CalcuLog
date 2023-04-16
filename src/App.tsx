@@ -43,7 +43,11 @@ function App() {
         setPEanswers(() => pe(PEinputs.trueValue, PEinputs.roundingchopping, PEinputs.numDigits))
       }; break;
       case markEnums.tmAns: {
-        setTManswers(() => tm(TMinputs.xvar, TMinputs.nthDegree, TMinputs.numDigits))
+        setTManswers(() => tm(
+          Number(TMinputs.xvar), 
+          Number(TMinputs.nthDegree), 
+          Number(TMinputs.numDigits)
+        ))
       }; break;
     }
   }, [PEinputs, TMinputs, PEinputsValid, TMinputsValid, screen])
