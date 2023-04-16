@@ -30,6 +30,15 @@ export default function TMSolution(props: TMAnsprops) {
             className="d-flex justify-content-between align-items-start"
           >
             <div className="ms-2 me-auto">
+              <div className="fw-bold">Absolute Error (Rounded)</div>
+              {props.absoluteErrorRounded}
+            </div>
+          </ListGroup.Item>
+          <ListGroup.Item 
+            as="li" 
+            className="d-flex justify-content-between align-items-start"
+          >
+            <div className="ms-2 me-auto">
               <div className="fw-bold">Percentage Relative Error (Rounded)</div>
               {props.percentageRelativeErrorRounded}%
             </div>
