@@ -6,6 +6,7 @@ export function checkPEVals(PEvalues: PEprops): PEinputsValidity {
   let inputValidity = {
     numDigits: true,
     trueValue: true,
+    approxValue: true,
     nthDegree: true,
   };
   
@@ -24,6 +25,19 @@ export function checkPEVals(PEvalues: PEprops): PEinputsValidity {
     inputValidity.trueValue = false
     console.log("Invalid true value in Propagation Error")
   }
+
+  console.log("evaluating approx value in PE")
+  if (PEvalues.approxValue.length > 0) {
+    try {
+      evaluate(PEvalues.approxValue)
+    } catch {
+      inputValidity.approxValue = false
+      console.log("Invalid approximate value in Propagation Error")
+    }
+  }
+
+  console.log("inputValidity: ")
+  console.table(inputValidity)
 
   return inputValidity
 }

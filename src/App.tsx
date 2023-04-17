@@ -5,6 +5,7 @@ import { PEAnsprops, PEinputsValidity, PEprops, TMAnsprops, TMinputsValidity, TM
 import { checkPEVals, checkTMVals } from './checkers';
 import { defaultPEAns, defaultPEVals, defaultTMAns, defaultTMVals } from './constants';
 import { markEnums, roundingchopping } from './enums';
+import pe, { pe2 } from './solvers/pe';
 import { useEffect, useRef, useState } from 'react'
 
 import BottomToolbar from './components/BottomToolbar';
@@ -14,7 +15,6 @@ import PEInput from './components/Inputs/PEInput';
 import PESolution from './components/Solutions/PESolution';
 import TMInput from './components/Inputs/TMInput';
 import TMSolution from './components/Solutions/TMSolution';
-import pe from './solvers/pe';
 import tm from './solvers/tm';
 
 function App() {
@@ -39,12 +39,20 @@ function App() {
   useEffect(() => {
     switch(screen) {
       case markEnums.peAns: {
-        
-        setPEanswers(() => pe(
-          PEinputs.trueValue, 
-          PEinputs.roundingchopping, 
-          Number(PEinputs.numDigits)
-        ))
+        if (PEinputs.approxValue.length > 0) {
+          setPEanswers(() => pe2(
+            PEinputs.trueValue,
+            PEinputs.approxValue,
+            PEinputs.roundingchopping, 
+            Number(PEinputs.numDigits)
+          ))
+        } else if (PEinputs.approxValue.length === 0) {
+          setPEanswers(() => pe(
+            PEinputs.trueValue, 
+            PEinputs.roundingchopping, 
+            Number(PEinputs.numDigits)
+          ))
+        }
       }; break;
       case markEnums.tmAns: {
         setTManswers(() => tm(
@@ -66,7 +74,7 @@ function App() {
     if (TMdata) {
       setTMInputs(TMdata)
     }
-  })
+  }, [])
 
   const handleKBPEChange = (input: string) => {
     const newTrueValue = convertFromSymbols(input); 
@@ -136,7 +144,7 @@ function App() {
         theme={"hg-theme-default hg-layout-default myTheme"}
         layout={{
           default: [
-            "1 2 3 4 5 6 7 8 9 0",
+            // "1 2 3 4 5 6 7 8 9 0",
             "π ℯ log(x) sqrt(x) (x/y)",
             "+ - * / , . ( [ ] )"
           ],

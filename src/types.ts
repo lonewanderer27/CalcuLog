@@ -3,6 +3,7 @@ import { roundingchopping } from "./enums";
 export let defaultPEValidity = {
   numDigits: true,
   trueValue: false,
+	approxValue: true,
   nthDegree: true,
 };
 
@@ -22,6 +23,7 @@ export type errorMessagesType = {
 export type PEinputsValidity = {
 	numDigits: boolean | string;
 	trueValue: boolean | string;
+	approxValue: boolean | string;
 	nthDegree: boolean | string;
 }
 

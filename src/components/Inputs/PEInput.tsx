@@ -63,6 +63,37 @@ export default function PEInput(props: {
             </div>
           </div>
           <div className="row">
+            <div className="col-12">
+              <Form.Group className="mb-3">
+                <Form.Label>Approximate Value</Form.Label>
+                <Form.Control 
+                  name="approxValue" 
+                  type="text" 
+                  value={convertToSymbols(props.approxValue)} 
+                  onChange={props.handlePEChange} 
+                  {...handleAns()}
+                />
+                {/* {props.PEvaluesValidity.trueValue === true && <div className="Tex2SVGContainer">
+                  <span style={{display: "absolute", top: 0, right: 0, color: "black"}}>Preview: </span>
+                  <Tex2SVG 
+                    class="Tex2SVG"
+                    display="inline" 
+                    latex={`${props.trueValue}`}
+                  />
+                </div>} */}
+                {props.screen === markEnums.idle && props.KB}
+                {props.PEvaluesValidity.approxValue !== true && 
+                  <Form.Text style={{color: "red"}}>
+                    Invalid approximate value
+                  </Form.Text>}
+                {props.approxValue.length === 0 &&
+                  <Form.Text style={{color: "gray"}}>
+                    No Approximated value is provided, so it will be computed based on the True Value
+                  </Form.Text>}
+              </Form.Group>
+            </div>
+          </div>
+          <div className="row">
             <div className="col-12 col-xl-6">
               <Form.Group className="mb-3">
                 <Form.Label>Round or Chop</Form.Label>
