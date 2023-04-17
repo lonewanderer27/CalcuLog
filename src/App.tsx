@@ -68,11 +68,13 @@ function App() {
     const PEdata = JSON.parse(localStorage.getItem("calculog-pedata"))
     if (PEdata) {
       setPEInputs(PEdata)
+      setPEInputsValid(checkPEVals(PEdata))
     }
 
     const TMdata = JSON.parse(localStorage.getItem("calculog-tmdata"))
     if (TMdata) {
       setTMInputs(TMdata)
+      setTMInputsValid(checkTMVals(TMdata))
     }
   }, [])
 
